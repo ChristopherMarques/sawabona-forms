@@ -1,0 +1,106 @@
+{
+    "landing": {
+        "beta": "v0.1.0 Beta Disponível Agora",
+        "hero": {
+            "title": "Formulários conversacionais,\nreimaginados.",
+            "subtitle": "Crie experiências estilo Typeform com um esquema JSON simples. Engenharia de ponta para performance e conversão.",
+            "start": "Começar Agora",
+            "demo": "Ver Componente"
+        },
+        "features": {
+            "title": "Por que Sawabona Forms?",
+            "subtitle": "Tudo o que você precisa para criar formulários poderosos.",
+            "schema": {
+                "title": "Baseado em Schema",
+                "desc": "Defina lógica, validação e layout em um único objeto JSON."
+            },
+            "theme": {
+                "title": "Motor Temático",
+                "desc": "Customize cada pixel. Modo escuro, fontes e espaçamentos via configuração."
+            },
+            "headless": {
+                "title": "Núcleo Headless",
+                "desc": "Construído sobre Radix UI e Framer Motion para interações fluidas e acessíveis."
+            },
+            "fullscreen": {
+                "title": "Engajamento Tela Cheia",
+                "desc": "Experiência sem distrações que aumenta taxas de conclusão. Uma pergunta por vez mantém o foco."
+            },
+            "fast": {
+                "title": "Ultra Rápido",
+                "desc": "Tamanho de bundle otimizado (<50kb)."
+            },
+            "types": {
+                "title": "Type Safe",
+                "desc": "Suporte total a TypeScript nativo."
+            },
+            "keyboard": {
+                "title": "Navegação por Teclado",
+                "desc": "Power users adoram. Atalhos para tudo."
+            }
+        },
+        "steps": {
+            "title": "Construa em minutos, não horas.",
+            "subtitle": "Pule o boilerplate. Defina seu esquema e deixe o motor lidar com o resto.",
+            "step1": {
+                "title": "Defina o Schema",
+                "desc": "Escreva um objeto JSON simples descrevendo perguntas e lógica."
+            },
+            "step2": {
+                "title": "Estilize & Personalize",
+                "desc": "Combine com sua identidade de marca usando um objeto de tema tipado."
+            },
+            "step3": {
+                "title": "Publique",
+                "desc": "Importe o componente e comece a coletar respostas imediatamente."
+            }
+        },
+        "comparison": {
+            "title": "Pare de reinventar a roda.",
+            "subtitle": "Construir um motor de formulários robusto leva meses. Nós fizemos isso por você.",
+            "manual": {
+                "title": "Construindo do Zero",
+                "items": [
+                    "Meses de desenvolvimento",
+                    "Gerenciamento de estado complexo",
+                    "Pesadelos de acessibilidade",
+                    "Difícil de manter"
+                ]
+            },
+            "sawabona": {
+                "title": "Sawabona Forms",
+                "items": [
+                    "Pronto em minutos",
+                    "Simplicidade baseada em Schema",
+                    "Compatível com WCAG 2.1",
+                    "Mantido pela comunidade"
+                ]
+            }
+        },
+        "opensource": {
+            "title": "Orgulhosamente Open Source",
+            "subtitle": "Transparência que você pode confiar. Código que você pode inspecionar.",
+            "desc": "Junte-se à nossa crescente comunidade de desenvolvedores contribuindo para o futuro das interfaces conversacionais.",
+            "action": "Ver no GitHub"
+        },
+        "cta": {
+            "title": "Pronto para criar formulários melhores?",
+            "subtitle": "Junte-se a desenvolvedores construindo a próxima geração de apps web.",
+            "docs": "Ler Documentação",
+            "demo": "Testar Demo"
+        },
+        "footer": {
+            "rights": "© {{year}} Sawabona Tech. Licença MIT.",
+            "built": "Feito para a web moderna."
+        }
+    },
+    "nav": {
+        "docs": "Documentação",
+        "github": "GitHub",
+        "demo": "Demo Ao Vivo"
+    },
+    "sidebar": {
+        "intro": "Introdução",
+        "getting_started": "Começando"
+    }
+}

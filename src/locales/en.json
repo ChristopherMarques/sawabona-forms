@@ -1,0 +1,106 @@
+{
+    "landing": {
+        "beta": "v0.1.0 Beta Now Available",
+        "hero": {
+            "title": "Conversational forms,\nreimagined.",
+            "subtitle": "Create Typeform-like experiences with a simple JSON schema. Engineered for performance, designed for conversion.",
+            "start": "Get Started",
+            "demo": "View Component"
+        },
+        "features": {
+            "title": "Why Sawabona Forms?",
+            "subtitle": "Everything you need to build powerful forms.",
+            "schema": {
+                "title": "Schema Driven",
+                "desc": "Define logic, validation, and layout in a single JSON object."
+            },
+            "theme": {
+                "title": "Themable Engine",
+                "desc": "Customize every pixel. Dark mode, fonts, spacings via theme config."
+            },
+            "headless": {
+                "title": "Headless Core",
+                "desc": "Built on Radix UI & Framer Motion for accessible, fluid interactions."
+            },
+            "fullscreen": {
+                "title": "Full-Screen Engagement",
+                "desc": "Distraction-free experience that increases completion rates. One question at a time keeps users focused."
+            },
+            "fast": {
+                "title": "Lightning Fast",
+                "desc": "Optimized bundle size (<50kb)."
+            },
+            "types": {
+                "title": "Type Safe",
+                "desc": "Full TypeScript support out of the box."
+            },
+            "keyboard": {
+                "title": "Keyboard Navigation",
+                "desc": "Power users love it. Shortcuts for everything."
+            }
+        },
+        "steps": {
+            "title": "Build in minutes, not hours.",
+            "subtitle": "Skip the boilerplate. Define your schema and let the engine handle the rest.",
+            "step1": {
+                "title": "Define Schema",
+                "desc": "Write a simple JSON object describing your questions and logic."
+            },
+            "step2": {
+                "title": "Style & Theme",
+                "desc": "Match your brand identity with a type-safe theme object."
+            },
+            "step3": {
+                "title": "Deploy",
+                "desc": "Import the component and start collecting responses immediately."
+            }
+        },
+        "comparison": {
+            "title": "Stop reinventing the wheel.",
+            "subtitle": "Building a robust form engine takes months. We did it for you.",
+            "manual": {
+                "title": "Building from Scratch",
+                "items": [
+                    "Months of development",
+                    "Complex state management",
+                    "Accessibility nightmares",
+                    "Hard to maintain"
+                ]
+            },
+            "sawabona": {
+                "title": "Sawabona Forms",
+                "items": [
+                    "Ready in minutes",
+                    "Schema-driven simplicity",
+                    "WCAG 2.1 Compliant",
+                    "Community maintained"
+                ]
+            }
+        },
+        "opensource": {
+            "title": "Proudly Open Source",
+            "subtitle": "Transparency you can trust. Code you can inspect.",
+            "desc": "Join our growing community of developers contributing to the future of conversational interfaces.",
+            "action": "View on GitHub"
+        },
+        "cta": {
+            "title": "Ready to build better forms?",
+            "subtitle": "Join developers building the next generation of web apps.",
+            "docs": "Read the Docs",
+            "demo": "Try the Demo"
+        },
+        "footer": {
+            "rights": "© {{year}} Sawabona Tech. MIT License.",
+            "built": "Built for the modern web."
+        }
+    },
+    "nav": {
+        "docs": "Documentation",
+        "github": "GitHub",
+        "demo": "Live Demo"
+    },
+    "sidebar": {
+        "intro": "Introduction",
+        "getting_started": "Getting Started"
+    }
+}
