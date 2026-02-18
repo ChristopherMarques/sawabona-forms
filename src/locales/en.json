@@ -23,20 +23,20 @@
                 "desc": "Built on Radix UI & Framer Motion for accessible, fluid interactions."
             },
             "fullscreen": {
-                "title": "Full-Screen Engagement",
-                "desc": "Distraction-free experience that increases completion rates. One question at a time keeps users focused."
+                "title": "Immersive Full-Screen Engagement",
+                "desc": "A distraction-free experience that users love. By focusing on one question at a time, completion rates skyrocket and data quality improves. It feels less like a form and more like a conversation."
             },
             "fast": {
-                "title": "Lightning Fast",
-                "desc": "Optimized bundle size (<50kb)."
+                "title": "Lightning Fast Performance",
+                "desc": "No bloat. Optimized bundle size (<50kb) ensures your forms load instantly, even on slow connections. Built for the modern web."
             },
             "types": {
-                "title": "Type Safe",
-                "desc": "Full TypeScript support out of the box."
+                "title": "End-to-End Type Safety",
+                "desc": "Built with TypeScript for TypeScript. Your schema, theme, and answers are fully typed, providing a developer experience that just works."
             },
             "keyboard": {
-                "title": "Keyboard Navigation",
-                "desc": "Power users love it. Shortcuts for everything."
+                "title": "Keyboard Navigation First",
+                "desc": "Designed for power users. Navigate through questions, select options, and submit without ever touching the mouse. It's fluid, accessible, and fast."
             }
         },
         "steps": {
@@ -101,6 +101,18 @@
     },
     "sidebar": {
         "intro": "Introduction",
-        "getting_started": "Getting Started"
+        "getting_started": "Getting Started",
+        "playground": "Playground"
+    },
+    "playground": {
+        "title": "Playground",
+        "subtitle": "Edit the schema and see the form update in real-time.",
+        "apply": "Run Code",
+        "reset": "Reset Form",
+        "reset_default": "Reset to Default",
+        "invalid": "Invalid syntax",
+        "valid": "Valid JSON",
+        "success": "Form submitted successfully!",
+        "success_desc": "Check the console for the data payload."
     }
 }

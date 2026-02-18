@@ -1,11 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect, type KeyboardEvent, type ChangeEvent } from 'react';
 import type { Question } from '../../core/types';
 import { useFormContext } from '../../core/FormContext';
 import { motion } from 'framer-motion';
 
 export function TextInput({ question }: { question: Question }) {
     const { answers, setAnswer, nextStep } = useFormContext();
-    const value = (answers[question.id] as string) || '';
+    const rawValue = answers[question.id];
+    const value = rawValue !== undefined && rawValue !== null ? String(rawValue) : '';
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -16,12 +17,22 @@ export function TextInput({ question }: { question: Question }) {
         return () => clearTimeout(timer);
     }, [question.id]);
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             // Basic validation check before moving
             if (question.validation?.required && !value) return;
             nextStep();
+        }
+    };
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        if (question.type === 'number') {
+            const num = val === '' ? '' : parseFloat(val);
+            setAnswer(question.id, num);
+        } else {
+            setAnswer(question.id, val);
         }
     };
 
@@ -31,7 +42,7 @@ export function TextInput({ question }: { question: Question }) {
                 ref={inputRef}
                 type={question.type}
                 value={value}
-                onChange={(e) => setAnswer(question.id, e.target.value)}
+                onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 placeholder={question.placeholder || 'Type your answer...'}
                 className="w-full bg-transparent text-3xl md:text-5xl border-b-2 border-primary/20 focus:border-primary py-4 outline-none transition-all placeholder:text-muted-foreground/20 font-light"

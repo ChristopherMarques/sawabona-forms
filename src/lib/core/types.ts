@@ -67,10 +67,14 @@ export interface FormTheme {
     textColor: string;
     fontFamily: string;
     borderRadius: string;
-    // Branding
+    // Branding & UI
     poweredBy?: string; // e.g. "Sawabona Forms"
     showPoweredBy?: boolean;
     brandColor?: string; // Specific color for the brand name in badge
+
+    // Controls
+    submitText?: string; // Custom text for submit button
+    buttonVariant?: 'solid' | 'outline';
 }
 
 export interface FormSchema {

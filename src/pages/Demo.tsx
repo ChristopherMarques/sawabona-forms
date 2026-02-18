@@ -2,6 +2,10 @@ import { FormRenderer } from '../lib/components/FormRenderer';
 import type { FormSchema } from '../lib/core/types';
 import '../index.css';
 import { Toaster, toast } from 'sonner';
+import { PageTransition } from '../components/PageTransition';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Globe, ArrowLeft } from 'lucide-react';
 
 const demoSchema: FormSchema = {
     id: 'demo-form-1',
@@ -62,30 +66,60 @@ const demoSchema: FormSchema = {
         }
     ],
     theme: {
-        backgroundColor: '#1A1A1B',
-        primaryColor: '#D90429',
-        textColor: '#FFF2F2',
+        backgroundColor: '#EFE9DB',
+        primaryColor: '#716C4A',
+        textColor: '#171717',
         fontFamily: 'Inter, sans-serif',
         borderRadius: '12px',
         poweredBy: 'Sawabona Tech',
         showPoweredBy: true,
-        brandColor: '#D90429'
+        brandColor: '#716C4A'
     }
 };
 
 export default function Demo() {
+    const { i18n } = useTranslation();
+
+    const changeLanguage = (lng: string) => {
+        i18n.changeLanguage(lng);
+    };
+
     const handleSubmit = (answers: any) => {
         console.log('Formulário Submetido:', answers);
         toast.success('Formulário enviado com sucesso! Obrigado por participar.');
     };
 
     return (
-        <div className="w-full h-screen bg-[#1A1A1B]">
-            <Toaster position="top-right" theme="dark" />
-            <FormRenderer
-                schema={demoSchema}
-                onSubmit={handleSubmit}
-            />
-        </div>
+        <PageTransition>
+            <div className="w-full h-screen bg-[#EFE9DB] relative select-none">
+                <div className="bg-noise"></div>
+
+                {/* Header Controls */}
+                <div className="fixed top-6 right-6 z-50 flex items-center gap-4">
+                    <Link to="/" className="p-2 rounded-full bg-[#716C4A]/10 text-[#716C4A] hover:bg-[#716C4A]/20 transition-colors">
+                        <ArrowLeft size={20} />
+                    </Link>
+
+                    <div className="flex items-center gap-2 px-3 py-1 bg-[#716C4A]/10 rounded-full border border-[#716C4A]/10">
+                        <Globe size={14} className="text-[#716C4A]" />
+                        <button
+                            onClick={() => changeLanguage('en')}
+                            className={`hover:text-[#716C4A] transition-colors ${i18n.language === 'en' ? 'text-[#716C4A] font-bold' : 'text-[#716C4A]/60'}`}
+                        >EN</button>
+                        <span className="text-[#716C4A]/20">|</span>
+                        <button
+                            onClick={() => changeLanguage('pt')}
+                            className={`hover:text-[#716C4A] transition-colors ${i18n.language === 'pt' ? 'text-[#716C4A] font-bold' : 'text-[#716C4A]/60'}`}
+                        >PT</button>
+                    </div>
+                </div>
+
+                <Toaster position="top-right" theme="light" />
+                <FormRenderer
+                    schema={demoSchema}
+                    onSubmit={handleSubmit}
+                />
+            </div>
+        </PageTransition>
     );
 }

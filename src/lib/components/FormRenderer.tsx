@@ -1,4 +1,4 @@
-import React from 'react';
+import { type CSSProperties } from 'react';
 import type { FormSchema } from '../core/types';
 import { useFormEngine } from '../core/useFormEngine';
 import { FormContext } from '../core/FormContext';
@@ -36,26 +36,29 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
         backgroundColor: theme.backgroundColor,
         color: theme.textColor,
         fontFamily: theme.fontFamily,
-    } as React.CSSProperties;
+    } as CSSProperties;
 
     // Enhanced Button Styles
+    const isOutline = theme.buttonVariant === 'outline';
+
     const primaryButtonStyles = {
-        backgroundColor: theme.primaryColor,
-        color: theme.textColor, // Assuming light text on dark primary for now, or based on contrast
-        borderRadius: '4px', // Sharper, more modern look
+        backgroundColor: isOutline ? 'transparent' : theme.primaryColor,
+        color: isOutline ? theme.primaryColor : theme.textColor,
+        border: isOutline ? `2px solid ${theme.primaryColor}` : 'none',
+        borderRadius: theme.borderRadius || '8px',
         fontWeight: 600,
-    } as React.CSSProperties;
+    } as CSSProperties;
 
     const secondaryButtonStyles = {
         color: theme.primaryColor,
-        borderRadius: '4px',
+        borderRadius: theme.borderRadius || '8px',
         fontWeight: 600,
-    } as React.CSSProperties;
+    } as CSSProperties;
 
     if (formState.isCompleted) {
         return (
             <div
-                className="flex flex-col items-center justify-center h-screen w-full p-8 text-center"
+                className="flex flex-col items-center justify-center h-full w-full p-8 text-center"
                 style={containerStyles}
             >
                 <motion.div
@@ -82,7 +85,7 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
     return (
         <FormContext.Provider value={{ ...formState, schema }}>
             <div
-                className="w-full h-screen flex flex-col relative overflow-hidden transition-colors duration-700"
+                className="w-full h-full flex flex-col relative overflow-hidden transition-colors duration-700"
                 style={containerStyles}
             >
                 {/* Minimal Top Progress Bar */}
@@ -119,7 +122,7 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                 </div>
 
                 {/* Footer / Navigation */}
-                <div className="w-full p-6 md:p-10 flex flex-col md:flex-row justify-between items-center z-20 gap-4">
+                <div className="w-full px-6 pt-6 pb-8 md:p-10 flex flex-col md:flex-row justify-between items-center z-20 gap-4">
                     {/* Powered By Badge */}
                     {theme.showPoweredBy !== false && (
                         <a
@@ -158,7 +161,11 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                             className="px-8 py-3 md:px-10 md:py-4 text-lg font-bold shadow-2xl flex items-center gap-3 transition-all rounded-lg"
                             style={primaryButtonStyles}
                         >
-                            <span>{formState.currentStepId === schema.questions[schema.questions.length - 1].id ? i18n.submit : i18n.next}</span>
+                            <span>
+                                {formState.currentStepId === schema.questions[schema.questions.length - 1].id
+                                    ? (theme.submitText || i18n.submit)
+                                    : i18n.next}
+                            </span>
                             {formState.currentStepId !== schema.questions[schema.questions.length - 1].id && <ChevronRight size={20} strokeWidth={3} />}
                         </motion.button>
                     </div>

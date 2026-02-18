@@ -11,8 +11,10 @@ export default defineConfig({
         dts({
             insertTypesEntry: true,
             include: ['src/lib'],
+            tsconfigPath: './tsconfig.lib.json'
         }),
     ],
+
     build: {
         lib: {
             entry: path.resolve(__dirname, 'src/lib/index.ts'),
@@ -26,7 +28,6 @@ export default defineConfig({
                 'react-dom',
                 'framer-motion',
                 'lucide-react',
-                'sonner',
                 'react/jsx-runtime'
             ],
             output: {
@@ -35,11 +36,17 @@ export default defineConfig({
                     'react-dom': 'ReactDOM',
                     'framer-motion': 'Motion',
                     'lucide-react': 'Lucide',
-                    'sonner': 'Sonner'
+                    'react/jsx-runtime': 'jsxRuntime'
+                },
+                assetFileNames: (assetInfo) => {
+                    if (assetInfo.name === 'style.css') return 'sawabona-forms.css';
+                    return assetInfo.name as string;
                 },
             },
         },
         outDir: 'dist',
         emptyOutDir: true,
+        cssTarget: 'chrome60',
+        target: 'es2015',
     },
 });

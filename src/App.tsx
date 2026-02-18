@@ -2,17 +2,22 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 
-// Lazy load pages for better performance
-const Landing = lazy(() => import('./pages/Landing'));
-const Docs = lazy(() => import('./pages/Docs'));
-const Demo = lazy(() => import('./pages/Demo'));
+// Helper to add minimum delay with type safety
+function minDelay<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      promise.then(resolve);
+    }, ms);
+  });
+}
+
+// Lazy load pages for better performance with min delay for loading screen
+const Landing = lazy(() => minDelay(import('./pages/Landing'), 2000));
+const Docs = lazy(() => minDelay(import('./pages/Docs'), 1000));
+const Demo = lazy(() => minDelay(import('./pages/Demo'), 1000));
 
 // Loading component
-const Loading = () => (
-  <div className="flex items-center justify-center min-h-screen bg-[#050505] text-white">
-    <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin"></div>
-  </div>
-);
+import { Loading } from './components/Loading';
 
 function App() {
   return (

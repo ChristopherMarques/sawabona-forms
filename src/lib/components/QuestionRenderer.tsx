@@ -52,7 +52,7 @@ export function QuestionRenderer({ question }: { question: Question }) {
             </div>
 
             <motion.div variants={itemVariants} className="w-full mt-6">
-                {question.type === 'text' || question.type === 'email' ? (
+                {question.type === 'text' || question.type === 'email' || question.type === 'number' || question.type === 'url' ? (
                     <TextInput question={question} />
                 ) : question.type === 'select' ? (
                     <SelectInput question={question} />

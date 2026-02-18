@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
 import { Menu, X, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import 'highlight.js/styles/github-dark.css';
+import 'highlight.js/styles/github-dark.css'; // Keep dark syntax highlighting or switch to a lighter one if preferred
+import { PageTransition } from '../components/PageTransition';
+import { Playground } from '../components/Playground';
 
 // Glob all markdown files from all subdirectories
 const DOCS_modules = import.meta.glob('../docs/**/*.md', { query: '?raw', import: 'default' });
@@ -43,14 +46,28 @@ function DocViewer() {
     }, [slug, i18n.language]);
 
     return (
-        <article className="prose prose-invert prose-zinc max-w-none 
-            prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight
-            prose-a:text-[#D90429] prose-a:no-underline hover:prose-a:text-[#ef233c]
-            prose-strong:text-white
-            prose-code:text-[#D90429] prose-code:bg-white/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
-            prose-pre:bg-[#0f0f10] prose-pre:border prose-pre:border-white/10
+        <article className="prose prose-zinc max-w-none 
+            prose-headings:text-[#171717] prose-headings:font-bold prose-headings:tracking-tight
+            prose-p:text-[#171717]/80
+            prose-a:text-[#716C4A] prose-a:no-underline hover:prose-a:text-[#5a563b]
+            prose-strong:text-[#171717]
+            prose-code:text-[#716C4A] prose-code:bg-[#716C4A]/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+            prose-pre:bg-[#171717] prose-pre:border prose-pre:border-[#716C4A]/10
+            prose-li:text-[#171717]/80
+            
+            /* Table Styles */
+            prose-table:w-full prose-table:text-left prose-table:border-collapse prose-table:my-8
+            prose-thead:bg-[#716C4A]/10 prose-thead:text-[#171717]
+            prose-th:p-4 prose-th:font-bold prose-th:text-sm prose-th:uppercase prose-th:tracking-wider prose-th:border-b prose-th:border-[#716C4A]/20
+            prose-td:p-4 prose-td:text-sm prose-td:border-b prose-td:border-[#716C4A]/10 prose-td:align-top
+            prose-tr:hover:bg-[#716C4A]/5 transition-colors
         ">
-            <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{content}</ReactMarkdown>
+            <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight]}
+            >
+                {content}
+            </ReactMarkdown>
         </article>
     );
 }
@@ -70,62 +87,74 @@ export default function Docs() {
     };
 
     return (
-        <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans flex">
+        <PageTransition>
+            <div className="min-h-screen bg-[#EFE9DB] text-[#171717] font-sans flex relative">
+                <div className="bg-noise"></div>
 
-            {/* Mobile Header */}
-            <div className="md:hidden fixed top-0 w-full h-16 bg-[#050505]/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-6 z-50">
-                <Link to="/" className="flex items-center gap-2 font-bold text-lg text-white">
-                    <div className="w-6 h-6 rounded bg-[#D90429] flex items-center justify-center text-[10px] font-mono">SF</div>
-                    <span>SAWABONA</span>
-                </Link>
-                <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-white">
-                    {isSidebarOpen ? <X /> : <Menu />}
-                </button>
-            </div>
-
-            {/* Sidebar */}
-            <aside className={`
-                fixed inset-y-0 left-0 z-40 w-64 bg-[#050505] border-r border-white/5 transform transition-transform duration-300 ease-in-out
-                md:translate-x-0 md:static md:h-screen md:sticky md:top-0
-                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            `}>
-                <div className="p-6 h-full flex flex-col">
-                    <Link to="/" className="flex items-center gap-2 font-bold text-xl text-white mb-8 hidden md:flex">
-                        <div className="w-8 h-8 rounded bg-gradient-to-br from-[#D90429] to-[#8d021f] flex items-center justify-center text-xs font-mono">SF</div>
+                {/* Mobile Header */}
+                <div className="md:hidden fixed top-0 w-full h-16 bg-[#EFE9DB]/80 backdrop-blur-md border-b border-[#716C4A]/10 flex items-center justify-between px-6 z-50">
+                    <Link to="/" className="flex items-center gap-2 font-bold text-lg text-[#171717]">
+                        <img src="/sawabona-logo.svg" alt="Sawabona Tech" className="w-6 h-6 text-[#716C4A]" />
+                        <span>SAWABONA</span>
                     </Link>
+                    <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-[#171717]">
+                        {isSidebarOpen ? <X /> : <Menu />}
+                    </button>
+                </div>
 
-                    <nav className="space-y-1 flex-1">
-                        <p className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 px-2">Getting Started</p>
-                        <Link to="/docs" className={`block px-2 py-1.5 rounded-md text-sm hover:text-white hover:bg-white/5 transition-colors ${location.pathname === '/docs' || location.pathname === '/docs/introduction' ? 'text-[#D90429] bg-[#D90429]/10' : ''}`}>
-                            {t('sidebar.intro', 'Introduction')}
+                {/* Sidebar */}
+                <aside className={`
+                    fixed inset-y-0 left-0 z-40 w-64 bg-[#EFE9DB] border-r border-[#716C4A]/10 transform transition-transform duration-300 ease-in-out
+                    md:translate-x-0 md:static md:h-screen md:sticky md:top-0
+                    ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+                `}>
+                    <div className="p-6 h-full flex flex-col relative z-20">
+                        <Link to="/" className="flex items-center gap-2 font-bold text-xl text-[#171717] mb-8 hidden md:flex">
+                            <img src="/sawabona-logo.svg" alt="Sawabona Tech" className="w-8 h-8 text-[#716C4A]" />
                         </Link>
-                        <Link to="/docs/getting-started" className={`block px-2 py-1.5 rounded-md text-sm hover:text-white hover:bg-white/5 transition-colors ${location.pathname === '/docs/getting-started' ? 'text-[#D90429] bg-[#D90429]/10' : ''}`}>
-                            {t('sidebar.getting_started', 'Getting Started')}
-                        </Link>
-                    </nav>
 
-                    {/* Footer / User / Env */}
-                    <div className="mt-auto pt-6 border-t border-white/5">
-                        <div className="flex items-center justify-between gap-4 text-xs font-mono text-zinc-600 mb-4">
-                            <span>v0.1.0</span>
-                            <div className="flex gap-2 items-center">
-                                <Globe size={12} className="text-zinc-600" />
-                                <button onClick={() => changeLanguage('en')} className={`hover:text-white transition-colors ${i18n.language === 'en' ? 'text-[#D90429] font-bold' : ''}`}>EN</button>
-                                <span className="text-zinc-700">|</span>
-                                <button onClick={() => changeLanguage('pt')} className={`hover:text-white transition-colors ${i18n.language === 'pt' ? 'text-[#D90429] font-bold' : ''}`}>PT</button>
+                        <nav className="space-y-1 flex-1 overflow-y-auto">
+                            <p className="text-xs font-bold text-[#716C4A] uppercase tracking-wider mb-2 px-2">Getting Started</p>
+                            <Link to="/docs" className={`block px-2 py-1.5 rounded-md text-sm hover:text-[#171717] hover:bg-[#716C4A]/5 transition-colors ${location.pathname === '/docs' || location.pathname === '/docs/introduction' ? 'text-[#716C4A] bg-[#716C4A]/10 font-medium' : 'text-[#716C4A]/80'}`}>
+                                {t('sidebar.intro', 'Introduction')}
+                            </Link>
+                            <Link to="/docs/getting-started" className={`block px-2 py-1.5 rounded-md text-sm hover:text-[#171717] hover:bg-[#716C4A]/5 transition-colors ${location.pathname === '/docs/getting-started' ? 'text-[#716C4A] bg-[#716C4A]/10 font-medium' : 'text-[#716C4A]/80'}`}>
+                                {t('sidebar.getting_started', 'Getting Started')}
+                            </Link>
+
+                            <p className="text-xs font-bold text-[#716C4A] uppercase tracking-wider mt-6 mb-2 px-2">Developers</p>
+                            <Link to="/docs/api-reference" className={`block px-2 py-1.5 rounded-md text-sm hover:text-[#171717] hover:bg-[#716C4A]/5 transition-colors ${location.pathname === '/docs/api-reference' ? 'text-[#716C4A] bg-[#716C4A]/10 font-medium' : 'text-[#716C4A]/80'}`}>
+                                {t('sidebar.api_reference', 'API Reference')}
+                            </Link>
+                            <Link to="/docs/playground" className={`block px-2 py-1.5 rounded-md text-sm hover:text-[#171717] hover:bg-[#716C4A]/5 transition-colors ${location.pathname === '/docs/playground' ? 'text-[#716C4A] bg-[#716C4A]/10 font-medium' : 'text-[#716C4A]/80'}`}>
+                                {t('sidebar.playground', 'Playground')}
+                            </Link>
+                        </nav>
+
+                        {/* Footer / User / Env */}
+                        <div className="mt-auto pt-6 border-t border-[#716C4A]/10">
+                            <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#716C4A]/80 mb-4">
+                                <span>v0.1.0</span>
+                                <div className="flex gap-2 items-center">
+                                    <Globe size={12} className="text-[#716C4A]" />
+                                    <button onClick={() => changeLanguage('en')} className={`hover:text-[#171717] transition-colors ${i18n.language === 'en' ? 'text-[#716C4A] font-bold' : ''}`}>EN</button>
+                                    <span className="text-[#716C4A]/40">|</span>
+                                    <button onClick={() => changeLanguage('pt')} className={`hover:text-[#171717] transition-colors ${i18n.language === 'pt' ? 'text-[#716C4A] font-bold' : ''}`}>PT</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </aside>
+                </aside>
 
-            {/* Main Content */}
-            <main className="flex-1 w-full max-w-4xl mx-auto p-6 pt-24 md:pt-12 md:px-12">
-                <Routes>
-                    <Route path="/" element={<DocViewer />} />
-                    <Route path=":slug" element={<DocViewer />} />
-                </Routes>
-            </main>
-        </div>
+                {/* Main Content */}
+                <main className={`flex-1 w-full mx-auto p-6 pt-24 md:pt-12 md:px-12 relative z-10 h-full overflow-y-auto ${location.pathname.includes('/playground') ? 'max-w-[1600px]' : 'max-w-4xl'}`}>
+                    <Routes>
+                        <Route path="/" element={<DocViewer />} />
+                        <Route path="playground" element={<Playground />} />
+                        <Route path=":slug" element={<DocViewer />} />
+                    </Routes>
+                </main>
+            </div>
+        </PageTransition>
     );
 }
