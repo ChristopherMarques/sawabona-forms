@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export function RatingInput({ question }: { question: Question }) {
     const { answers, setAnswer } = useFormContext();
     const value = (answers[question.id] as number) || 0;
-    const max = question.validation?.max || 5;
+    const max = Math.min(question.validation?.max || 5, 20); // Security cap to prevent DoS
 
     return (
         <div className="flex flex-col gap-6">

@@ -1,105 +1,159 @@
-# Sawabona Forms
+# @sawabona/forms
 
-A powerful, customizable, and animated form rendering library for React. Built with `framer-motion` and Tailwind CSS.
+<div align="center">
 
-## Features
+[![Feito pela Sawabona Tech](https://img.shields.io/badge/Feito%20pela-Sawabona%20Tech-716C4A?style=for-the-badge&logoColor=white)](https://www.sawabona.tech/)
+[![Licença: MIT](https://img.shields.io/badge/Licença-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-- 🚀 **Schema-driven**: Define your forms with a simple JSON schema.
-- 🎨 **Fully Customizable**: Control colors, fonts, and layout via theme props.
-- 🎭 **Smooth Animations**: Built-in transitions powered by Framer Motion.
-- 📱 **Responsive**: Mobile-first design that looks great on any device.
-- ⌨️ **Keyboard Navigation**: Optimized for keyboard users.
-- 🛠️ **Developer Friendly**: Written in TypeScript with full type safety.
+**Uma biblioteca de formulários poderosa, customizável e animada para React.**
+*Feita com tecnologias modernas: baseada em schema, acessível e performática.*
 
-## Installation
+</div>
+
+---
+
+## 🌍 Por que @sawabona/forms?
+
+O **Sawabona Forms** nasceu para facilitar a criação de formulários conversacionais de alta qualidade. Enquanto muitas ferramentas de mercado são caras ou presas a ecossistemas fechados, o `@sawabona/forms` oferece uma **base open-source e focada no desenvolvedor** para criar experiências de coleta de dados que realmente engajam.
+
+Capture leads, receba feedbacks ou faça o onboarding de usuários com uma interface que parece uma conversa, e não um interrogatório chato.
+
+### Principais Recursos
+
+- 🚀 **Arquitetura Baseada em Schema**: Defina formulários complexos com um JSON simples.
+- 🎨 **100% Personalizável (White-Label)**: Controle total de cores, fontes e bordas para combinar com sua marca.
+- 💬 **Interpolação de Variáveis**: Crie conversas dinâmicas citando respostas anteriores (ex: "Prazer, {{nome}}!").
+- 🎭 **Animações Suaves**: Transições fluidas nativas, impulsionadas pelo `framer-motion`.
+- 📱 **Mobile-First**: Experiência de uso perfeita em celulares e tablets.
+- 🛡️ **Segurança Integrada**: Sanitização de input, proteção contra DoS e validações prontas para uso.
+- 🔄 **Reinício Automático**: Modo Kiosk para eventos, reiniciando o formulário automaticamente após o envio.
+- ⌨️ **Acessível**: Navegação otimizada para teclado e leitores de tela.
+
+---
+
+## 📦 Instalação
+
+Instale o pacote e suas dependências via npm, yarn ou pnpm.
 
 ```bash
-npm install sawabona-forms framer-motion lucide-react clsx tailwind-merge
-# or
-yarn add sawabona-forms framer-motion lucide-react clsx tailwind-merge
+npm install @sawabona/forms
+# ou
+yarn add @sawabona/forms
 ```
 
-## Usage
+---
 
-1. **Import the styles**:
-   Import the CSS file in your root component file (e.g., `main.tsx` or `App.tsx`):
+## 🚀 Começando
 
-   ```tsx
-   import 'sawabona-forms/dist/sawabona-forms.css';
-   ```
+### 1. Importe os Estilos
+A biblioteca vem com um arquivo CSS zero-config. O CSS é essencial para o layout funcionar corretamente. Importe-o uma vez no seu componente raiz (`_app.tsx`, `layout.tsx` ou `main.tsx`).
 
-2. **Use the `FormRenderer`**:
+```tsx
+import '@sawabona/forms/dist/sawabona-forms.css';
+```
 
-   ```tsx
-   import { FormRenderer, FormSchema } from 'sawabona-forms';
+### 2. Crie o Schema
+Defina a estrutura do seu formulário. Sem JSX complexo, apenas descritivo.
 
-   const schema: FormSchema = {
-     title: "Contact Us",
-     questions: [
-       {
-         id: "name",
-         type: "text",
-         title: "What is your name?",
-         placeholder: "Type your name here...",
-         validation: { required: true }
-       },
-       {
-         id: "email",
-         type: "email",
-         title: "What is your email?",
-         placeholder: "name@example.com",
-         validation: { required: true, pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$" }
-       }
-     ],
-     theme: {
-       primaryColor: "#716C4A",
-       backgroundColor: "#EFE9DB",
-       textColor: "#171717",
-       buttonVariant: "solid", // or 'outline'
-       submitText: "Send Message"
-     }
-   };
+```tsx
+import { FormSchema } from '@sawabona/forms';
 
-   function App() {
-     const handleSubmit = (answers: any) => {
-       console.log("Form submitted:", answers);
-     };
+const manualDoMundo: FormSchema = {
+  title: "Fale Conosco",
+  questions: [
+    {
+      id: "nome",
+      type: "text",
+      title: "Qual é o seu nome?",
+      placeholder: "Digite seu nome aqui...",
+      validation: { required: true, maxLength: 100 }
+    },
+    {
+      id: "email",
+      type: "email",
+      title: "Prazer em te conhecer, {{nome}}! Qual é o seu melhor e-mail?",
+      validation: { required: true, email: true }
+    }
+  ],
+  theme: {
+    primaryColor: "#716C4A",
+    backgroundColor: "#EFE9DB",
+    textColor: "#171717",
+    fontFamily: '"Josefin Sans", sans-serif'
+  }
+};
+```
 
-     return (
-       <div style={{ height: '100vh' }}>
-         <FormRenderer schema={schema} onSubmit={handleSubmit} />
-       </div>
-     );
-   }
-   ```
+### 3. Renderize o Formulário
 
-## API Reference
+```tsx
+import { FormRenderer } from '@sawabona/forms';
 
-### `FormRenderer` Props
+export default function MinhaPagina() {
+  return (
+    <div style={{ height: '100vh' }}>
+      <FormRenderer 
+        schema={manualDoMundo} 
+        onSubmit={(dados) => console.log(dados)} 
+      />
+    </div>
+  );
+}
+```
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `schema` | `FormSchema` | The JSON schema defining the form structure and theme. |
-| `onSubmit` | `(answers: any) => void` | Callback function fired when the form is submitted. |
+---
+
+## 🏗️ Estrutura Recomendada
+
+Para aplicações escaláveis, recomendamos manter seus schemas separados dos seus componentes:
+
+```
+src/
+├── schemas/
+│   ├── formulario-contato.ts
+│   └── fluxo-onboarding.ts
+├── components/
+│   └── WrapperFormulario.tsx
+└── pages/
+    └── contato.tsx
+```
+
+Isso garante que sua lógica permaneça limpa e seu conteúdo seja facilmente editável (ou buscado de uma API!).
+
+---
+
+## 📚 Referência da API
 
 ### `FormSchema`
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `title` | `string` | Form title. |
-| `questions` | `Question[]` | Array of question objects. |
-| `theme` | `FormTheme` | (Optional) Theme customization. |
-| `i18n` | `object` | (Optional) Override text strings (Next, Back, Submit, etc.). |
+| Propriedade | Tipo | Descrição |
+|-------------|------|-----------|
+| `title` | `string` | Título do formulário. |
+| `questions` | `Question[]` | Array de perguntas. |
+| `theme` | `FormTheme` | (Opcional) Customização visual (cores, fontes). |
+| `i18n` | `object` | (Opcional) Tradução de botões e textos fixos. |
+| `autoReload` | `boolean` | (Opcional) Se `true`, reinicia o formulário automaticamente após o envio. |
+| `reloadDelay` | `number` | (Opcional) Tempo em milissegundos para aguardar antes de reiniciar (Padrão: 3000). |
 
-### Question Types
+---
 
-- `text`: Single line text input.
-- `email`: Email input with validation.
-- `number`: Numeric input.
-- `url`: URL input.
-- `select`: options selection.
-- `rating`: Star rating input.
+## 🤝 Contribuindo
 
-## License
+Contribuições da comunidade são muito bem-vindas! Seja corrigindo um bug, adicionando um novo tipo de pergunta ou melhorando a documentação.
 
-MIT
+Por favor, leia nosso [Guia de Contribuição](CONTRIBUTING.md) para aprender como:
+1. Fazer um fork do repositório
+2. Criar uma branch de feature
+3. Enviar um Pull Request (usando nosso template)
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+---
+
+<div align="center">
+  <p>Mantido com ❤️ pela <a href="https://www.sawabona.tech/">Sawabona Tech</a></p>
+</div>

@@ -16,6 +16,18 @@ export function QuestionRenderer({ question }: { question: Question }) {
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } }
     };
 
+    // Logic to replace {{variable}} with answer values
+    const replaceVariables = (text: string) => {
+        if (!text) return text;
+        return text.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+            const answer = formContext.answers[key];
+            return answer !== undefined && answer !== null ? String(answer) : '';
+        });
+    };
+
+    // We need the full context for answers
+    const formContext = useFormContext();
+
     return (
         <motion.div
             className="flex flex-col gap-8 w-full max-w-4xl mx-auto"
@@ -38,7 +50,7 @@ export function QuestionRenderer({ question }: { question: Question }) {
                     variants={itemVariants}
                     className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-pretty mt-2"
                 >
-                    {question.title} <span className="text-primary">*</span>
+                    {replaceVariables(question.title)} <span className="text-primary">*</span>
                 </motion.h2>
 
                 {question.description && (
@@ -46,7 +58,7 @@ export function QuestionRenderer({ question }: { question: Question }) {
                         variants={itemVariants}
                         className="text-lg md:text-xl text-muted-foreground font-normal leading-relaxed max-w-2xl mt-2"
                     >
-                        {question.description}
+                        {replaceVariables(question.description)}
                     </motion.p>
                 )}
             </div>

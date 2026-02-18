@@ -7,9 +7,9 @@ Get up and running with Sawabona Forms in less than 5 minutes.
 Install the package via npm, yarn, or pnpm.
 
 ```bash
-npm install sawabona-forms
+npm install @sawabona/forms
 # or
-yarn add sawabona-forms
+yarn add @sawabona/forms
 ```
 
 ## Basic Usage
@@ -19,8 +19,8 @@ yarn add sawabona-forms
 3. **Render the Component**: pass the schema and an `onSubmit` handler.
 
 ```tsx
-import { FormRenderer, FormSchema } from 'sawabona-forms';
-import 'sawabona-forms/dist/style.css'; // Make sure to import this!
+import { FormRenderer, FormSchema } from '@sawabona/forms';
+import '@sawabona/forms/dist/sawabona-forms.css'; // Make sure to import this!
 
 const mySchema: FormSchema = {
   id: 'onboarding',
@@ -73,6 +73,19 @@ const theme = {
     backgroundColor: '#EFE9DB',
     textColor: '#171717',
     fontFamily: '"Josefin Sans", sans-serif'
+};
+```
+
+
+## Auto-Reload (Kiosk Mode)
+
+If you are using the form at an event or kiosk, you might want it to reset automatically after submission.
+
+```tsx
+const schema: FormSchema = {
+  // ... other props
+  autoReload: true,
+  reloadDelay: 5000 // Resets after 5 seconds (default 3000ms)
 };
 ```
 

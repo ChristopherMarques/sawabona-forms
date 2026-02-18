@@ -85,7 +85,9 @@ const defaultSchemas: Record<string, FormSchema> = {
             submitText: 'Enviar Agora!',
             buttonVariant: 'outline',
             showPoweredBy: true
-        }
+        },
+        autoReload: true,
+        reloadDelay: 3000
     }
 };
 
@@ -175,8 +177,8 @@ export const Playground = () => {
                     <button
                         onClick={() => setActiveTab('code')}
                         className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'code'
-                                ? 'bg-[#716C4A] text-[#EFE9DB] shadow-sm'
-                                : 'text-[#716C4A] hover:bg-[#716C4A]/10'
+                            ? 'bg-[#716C4A] text-[#EFE9DB] shadow-sm'
+                            : 'text-[#716C4A] hover:bg-[#716C4A]/10'
                             }`}
                     >
                         <span>JSON</span>
@@ -184,8 +186,8 @@ export const Playground = () => {
                     <button
                         onClick={() => setActiveTab('preview')}
                         className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium transition-all ${activeTab === 'preview'
-                                ? 'bg-[#716C4A] text-[#EFE9DB] shadow-sm'
-                                : 'text-[#716C4A] hover:bg-[#716C4A]/10'
+                            ? 'bg-[#716C4A] text-[#EFE9DB] shadow-sm'
+                            : 'text-[#716C4A] hover:bg-[#716C4A]/10'
                             }`}
                     >
                         <span>Preview</span>

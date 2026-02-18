@@ -39,7 +39,7 @@ export default defineConfig({
                     'react/jsx-runtime': 'jsxRuntime'
                 },
                 assetFileNames: (assetInfo) => {
-                    if (assetInfo.name === 'style.css') return 'sawabona-forms.css';
+                    if (assetInfo.name === 'style.css' || assetInfo.name === 'styles.css' || assetInfo.name === 'forms.css') return 'sawabona-forms.css';
                     return assetInfo.name as string;
                 },
             },

@@ -1,4 +1,4 @@
-import { type CSSProperties } from 'react';
+import { type CSSProperties, useEffect } from 'react';
 import type { FormSchema } from '../core/types';
 import { useFormEngine } from '../core/useFormEngine';
 import { FormContext } from '../core/FormContext';
@@ -55,12 +55,34 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
         fontWeight: 600,
     } as CSSProperties;
 
+    const { autoReload, reloadDelay = 3000 } = schema;
+
+    // Auto-reload effect
+    useEffect(() => {
+        if (formState.isCompleted && autoReload) {
+            const timer = setTimeout(() => {
+                formState.resetForm();
+            }, reloadDelay);
+            return () => clearTimeout(timer);
+        }
+    }, [formState.isCompleted, autoReload, reloadDelay, formState.resetForm]);
+
     if (formState.isCompleted) {
         return (
             <div
-                className="flex flex-col items-center justify-center h-full w-full p-8 text-center"
+                className="flex flex-col items-center justify-center h-full w-full p-8 text-center relative overflow-hidden"
                 style={containerStyles}
             >
+                {/* Auto-reload progress bar */}
+                {autoReload && (
+                    <motion.div
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: reloadDelay / 1000, ease: "linear" }}
+                        className="absolute top-0 left-0 h-1 bg-green-500 z-50"
+                    />
+                )}
+
                 <motion.div
                     initial={{ scale: 0.9, opacity: 0, y: 20 }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}

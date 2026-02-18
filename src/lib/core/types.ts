@@ -90,6 +90,8 @@ export interface FormSchema {
         optional: string;
         stepInfo: string; // e.g., "Question {{current}} of {{total}}"
     };
+    autoReload?: boolean;
+    reloadDelay?: number; // milliseconds, default 3000
 }
 
 export type AnswerValue = string | number | boolean | string[] | number[];
@@ -110,5 +112,6 @@ export interface FormContextType extends FormState {
     prevStep: () => void;
     jumpToStep: (stepId: string) => void;
     submitForm: () => void;
+    resetForm: () => void;
     registerError: (questionId: string, error: string | null) => void;
 }

@@ -17,22 +17,63 @@ export function TextInput({ question }: { question: Question }) {
         return () => clearTimeout(timer);
     }, [question.id]);
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            // Basic validation check before moving
-            if (question.validation?.required && !value) return;
-            nextStep();
-        }
-    };
-
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const val = e.target.value;
+        let val = e.target.value;
+
+        // Security: Enforce max length to prevent DoS (default 2048 chars if not specified)
+        const MAX_SAFE_LENGTH = question.validation?.maxLength || 2048;
+        if (val.length > MAX_SAFE_LENGTH) {
+            val = val.slice(0, MAX_SAFE_LENGTH);
+        }
+
         if (question.type === 'number') {
             const num = val === '' ? '' : parseFloat(val);
             setAnswer(question.id, num);
         } else {
             setAnswer(question.id, val);
+        }
+    };
+
+    const validateInput = (): boolean => {
+        if (question.validation?.required && !value) return false;
+
+        if (value) {
+            if (question.validation?.minLength && value.length < question.validation.minLength) return false;
+
+            if (question.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return false;
+
+            if (question.validation?.pattern) {
+                try {
+                    const regex = new RegExp(question.validation.pattern);
+                    if (!regex.test(value)) return false;
+                } catch (e) {
+                    console.error('Invalid regex pattern in schema', e);
+                }
+            }
+
+            if (question.type === 'number') {
+                const num = parseFloat(value);
+                if (!isNaN(num)) {
+                    if (question.validation?.min !== undefined && num < question.validation.min) return false;
+                    if (question.validation?.max !== undefined && num > question.validation.max) return false;
+                }
+            }
+        }
+
+        return true;
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            if (!validateInput()) {
+                // Shake or show error (logic to be added to Context if needed, for now just block)
+                const formContainer = document.querySelector('.sawabona-form-container') || document.body;
+                formContainer.classList.add('shake-animation'); // Placeholder for visual feedback
+                setTimeout(() => formContainer.classList.remove('shake-animation'), 500);
+                return;
+            }
+            nextStep();
         }
     };
 

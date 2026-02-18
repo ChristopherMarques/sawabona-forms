@@ -123,6 +123,17 @@ export function useFormEngine({ schema, onSubmit }: UseFormEngineProps) {
         }));
     }, [schema.questions]);
 
+    const resetForm = useCallback(() => {
+        setState({
+            answers: {},
+            currentStepId: schema.questions[0]?.id || '',
+            history: [],
+            isSubmitting: false,
+            errors: {},
+            isCompleted: false,
+        });
+    }, [schema.questions]);
+
     return {
         ...state,
         setAnswer,
@@ -130,6 +141,7 @@ export function useFormEngine({ schema, onSubmit }: UseFormEngineProps) {
         prevStep,
         jumpToStep,
         submitForm: () => onSubmit?.(state.answers),
+        resetForm,
         registerError,
         // Helper to calculate progress
         progress: ((currentQuestionIndex) / schema.questions.length) * 100
