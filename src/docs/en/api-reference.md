@@ -13,6 +13,7 @@ The root object of your form definition.
 | `questions` | `Question[]` | Yes | An array of question objects (see below). |
 | `theme` | `FormTheme` | No | Customization options for the form's appearance. |
 | `i18n` | `object` | No | Override default labels (next, back, submit). |
+| `disableAutoFocus` | `boolean` | No | Prevent auto-scroll/focus on load. |
 
 ## FormTheme
 

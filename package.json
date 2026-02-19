@@ -1,7 +1,7 @@
 {
   "name": "@sawabona/forms",
   "private": false,
-  "version": "0.3.0",
+  "version": "0.9.0",
   "type": "module",
   "main": "./dist/sawabona-forms.umd.js",
   "module": "./dist/sawabona-forms.es.js",

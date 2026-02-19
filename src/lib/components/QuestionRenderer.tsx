@@ -39,7 +39,7 @@ export function QuestionRenderer({ question }: { question: Question }) {
         >
             <div className="flex flex-col gap-2">
                 <motion.div variants={itemVariants} className="flex gap-4 items-baseline">
-                    <span className="flex items-center gap-2 text-sm md:text-base font-medium text-primary/90 bg-primary/10 px-3 py-1 rounded-full border border-primary/20 backdrop-blur-sm">
+                    <span className="flex items-center gap-2 text-sm md:text-base font-medium text-sw-primary/90 bg-sw-primary/10 px-3 py-1 rounded-full border border-sw-primary/20 backdrop-blur-sm">
                         <span>{currentStepIndex}</span>
                         <span className="opacity-40 text-xs">/</span>
                         <span className="opacity-60">{totalSteps}</span>
@@ -48,9 +48,9 @@ export function QuestionRenderer({ question }: { question: Question }) {
 
                 <motion.h2
                     variants={itemVariants}
-                    className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-pretty mt-2"
+                    className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-pretty mt-2 font-sw-heading"
                 >
-                    {replaceVariables(question.title)} <span className="text-primary">*</span>
+                    {replaceVariables(question.title)} <span className="text-sw-primary">*</span>
                 </motion.h2>
 
                 {question.description && (

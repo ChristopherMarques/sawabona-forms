@@ -134,6 +134,7 @@ Isso garante que sua lógica permaneça limpa e seu conteúdo seja facilmente ed
 | `i18n` | `object` | (Opcional) Tradução de botões e textos fixos. |
 | `autoReload` | `boolean` | (Opcional) Se `true`, reinicia o formulário automaticamente após o envio. |
 | `reloadDelay` | `number` | (Opcional) Tempo em milissegundos para aguardar antes de reiniciar (Padrão: 3000). |
+| `disableAutoFocus` | `boolean` | (Opcional) Desativar scroll automático no carregamento (Padrão: false). |
 
 ---
 

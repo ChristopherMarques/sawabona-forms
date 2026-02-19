@@ -2,42 +2,36 @@
 @import "tailwindcss/utilities" layer(utilities);
 
 @theme {
-    --font-heading: 'Yeseva One', serif;
-    --font-body: 'Josefin Sans', sans-serif;
-    --color-primary: #716C4A;
-    --color-background: #EFE9DB;
-    --color-text-primary: #716C4A;
-    --color-text-secondary: #171717;
+    --font-sw-heading: inherit;
+    --font-sw-body: inherit;
+    --color-sw-primary: #716C4A;
+    --color-sw-background: #EFE9DB;
+    --color-sw-text-primary: #716C4A;
+    --color-sw-text-secondary: #171717;
 }
 
 /* Base styles scoped to the form container */
 .sawabona-form-container {
-    font-family: var(--font-body);
-    color: var(--color-text-secondary);
+    font-family: var(--font-sw-body);
+    color: var(--color-sw-text-secondary);
 }
 
-/* Typography Utilities */
-.font-heading {
-    font-family: var(--font-heading);
+/* Scoped Typography Helpers (used inside the form only) */
+.sawabona-form-container .font-heading {
+    font-family: var(--font-sw-heading);
 }
 
-.font-body {
-    font-family: var(--font-body);
+.sawabona-form-container .font-body {
+    font-family: var(--font-sw-body);
 }
 
-/* Base library styles */
-.sawabona-form-container {
-    font-family: var(--font-body);
-    color: var(--color-text-secondary);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: var(--font-heading);
+.sawabona-form-container h1,
+.sawabona-form-container h2,
+.sawabona-form-container h3,
+.sawabona-form-container h4,
+.sawabona-form-container h5,
+.sawabona-form-container h6 {
+    font-family: var(--font-sw-heading);
     font-weight: 400;
 }
 

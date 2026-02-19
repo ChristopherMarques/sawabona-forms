@@ -1,5 +1,5 @@
 import { type CSSProperties, useEffect } from 'react';
-import type { FormSchema } from '../core/types';
+import type { FormSchema, FormTheme } from '../core/types';
 import { useFormEngine } from '../core/useFormEngine';
 import { FormContext } from '../core/FormContext';
 import { QuestionRenderer } from './QuestionRenderer';
@@ -22,12 +22,12 @@ const defaultI18n = {
 
 export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
     const formState = useFormEngine({ schema, onSubmit });
-    const theme = schema.theme || {
+    const theme: FormTheme = schema.theme || {
         backgroundColor: '#ffffff',
         textColor: '#000000', // Start with generic defaults, override in usage
         primaryColor: '#000000',
         borderRadius: '8px',
-        fontFamily: 'sans-serif'
+        // fontFamily removed to allow inheritance
     };
 
     const i18n = { ...defaultI18n, ...schema.i18n };
@@ -36,6 +36,13 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
         backgroundColor: theme.backgroundColor,
         color: theme.textColor,
         fontFamily: theme.fontFamily,
+        // Inject CSS Variables for Tailwind to pick up
+        '--color-sw-primary': theme.primaryColor,
+        '--color-sw-background': theme.backgroundColor,
+        '--color-sw-text-primary': theme.primaryColor,
+        '--color-sw-text-secondary': theme.textColor,
+        '--font-sw-heading': theme.fontFamily || 'inherit',
+        '--font-sw-body': theme.fontFamily || 'inherit',
     } as CSSProperties;
 
     // Enhanced Button Styles
@@ -149,13 +156,13 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                     {theme.showPoweredBy !== false && (
                         <a
                             href="#"
-                            className="order-3 md:order-1 group flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/10 bg-black/20 hover:border-primary/50 hover:bg-black/40 transition-all duration-300 cursor-pointer no-underline backdrop-blur-sm"
+                            className="order-3 md:order-1 group flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/10 bg-black/20 hover:border-sw-primary/50 hover:bg-black/40 transition-all duration-300 cursor-pointer no-underline backdrop-blur-sm"
                         >
                             <span className="text-[10px] md:text-xs font-mono font-medium tracking-[0.2em] uppercase text-muted-foreground group-hover:text-muted-foreground/80 transition-colors">
                                 Powered By
                             </span>
                             <span
-                                className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase transition-colors shadow-primary"
+                                className="text-[10px] md:text-xs font-mono font-bold tracking-[0.2em] uppercase transition-colors shadow-sw-primary"
                                 style={{ color: theme.brandColor || theme.primaryColor }}
                             >
                                 {theme.poweredBy?.replace('Powered by ', '') || 'SAWABONA TECH'}

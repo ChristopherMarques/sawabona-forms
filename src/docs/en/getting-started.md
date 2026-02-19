@@ -89,4 +89,15 @@ const schema: FormSchema = {
 };
 ```
 
+## Prevent Auto-Scroll
+
+By default, the form focuses on the first input, which might cause the page to scroll. You can disable this:
+
+```tsx
+const schema: FormSchema = {
+  // ... other props
+  disableAutoFocus: true
+};
+```
+
 Check out the [Playground](/docs/playground) to experiment with schemas and themes live.

@@ -134,7 +134,7 @@ export default function Docs() {
                         {/* Footer / User / Env */}
                         <div className="mt-auto pt-6 border-t border-[#716C4A]/10">
                             <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#716C4A]/80 mb-4">
-                                <span>v0.3.0</span>
+                                <span>v0.9.0</span>
                                 <div className="flex gap-2 items-center">
                                     <Globe size={12} className="text-[#716C4A]" />
                                     <button onClick={() => changeLanguage('en')} className={`hover:text-[#171717] transition-colors ${i18n.language === 'en' ? 'text-[#716C4A] font-bold' : ''}`}>EN</button>

@@ -13,6 +13,7 @@ O objeto raiz da definição do seu formulário.
 | `questions` | `Question[]` | Sim | Lista de objetos de pergunta (veja abaixo). |
 | `theme` | `FormTheme` | Não | Opções de personalização da aparência. |
 | `i18n` | `object` | Não | Sobrescreve textos padrão (próximo, voltar). |
+| `disableAutoFocus` | `boolean` | Não | Evita scroll/foco automático ao carregar. |
 
 ## FormTheme (Tema)
 

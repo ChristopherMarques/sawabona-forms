@@ -65,7 +65,7 @@ export interface FormTheme {
     primaryColor: string;
     backgroundColor: string;
     textColor: string;
-    fontFamily: string;
+    fontFamily?: string;
     borderRadius: string;
     // Branding & UI
     poweredBy?: string; // e.g. "Sawabona Forms"
@@ -90,8 +90,10 @@ export interface FormSchema {
         optional: string;
         stepInfo: string; // e.g., "Question {{current}} of {{total}}"
     };
+    // Behaviors
     autoReload?: boolean;
-    reloadDelay?: number; // milliseconds, default 3000
+    reloadDelay?: number; // milliseconds, default 5000
+    disableAutoFocus?: boolean; // prevent scroll jump on load
 }
 
 export type AnswerValue = string | number | boolean | string[] | number[];

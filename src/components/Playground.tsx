@@ -87,7 +87,7 @@ const defaultSchemas: Record<string, FormSchema> = {
             showPoweredBy: true
         },
         autoReload: true,
-        reloadDelay: 3000
+        reloadDelay: 3000,
     }
 };
 

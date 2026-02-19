@@ -4,18 +4,24 @@ import { useFormContext } from '../../core/FormContext';
 import { motion } from 'framer-motion';
 
 export function TextInput({ question }: { question: Question }) {
-    const { answers, setAnswer, nextStep } = useFormContext();
+    const { answers, setAnswer, nextStep, schema } = useFormContext();
     const rawValue = answers[question.id];
     const value = rawValue !== undefined && rawValue !== null ? String(rawValue) : '';
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // Check if this is the first question
+    const isFirstQuestion = schema.questions[0].id === question.id;
+    const shouldAutoFocus = !schema.disableAutoFocus || !isFirstQuestion;
+
     useEffect(() => {
-        // Auto-focus with a slight delay to allow transition to complete
-        const timer = setTimeout(() => {
-            inputRef.current?.focus();
-        }, 500);
-        return () => clearTimeout(timer);
-    }, [question.id]);
+        if (shouldAutoFocus) {
+            // Auto-focus with a slight delay to allow transition to complete
+            const timer = setTimeout(() => {
+                inputRef.current?.focus();
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [question.id, shouldAutoFocus]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         let val = e.target.value;
@@ -77,31 +83,52 @@ export function TextInput({ question }: { question: Question }) {
         }
     };
 
+    // Assuming 'error' state is managed elsewhere or will be added.
+    // For this change, we'll just declare it as undefined to avoid compilation errors.
+    const error = undefined;
+
     return (
         <div className="w-full relative group">
             <input
                 ref={inputRef}
                 type={question.type}
-                value={value}
+                value={typeof value === 'string' || typeof value === 'number' ? value : ''}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
-                placeholder={question.placeholder || 'Type your answer...'}
-                className="w-full bg-transparent text-3xl md:text-5xl border-b-2 border-primary/20 focus:border-primary py-4 outline-none transition-all placeholder:text-muted-foreground/20 font-light"
-            />
-            <motion.div
-                initial={{ width: "0%" }}
-                animate={{ width: value ? '100%' : '0%' }}
-                transition={{ duration: 0.3 }}
-                className="absolute bottom-0 left-0 h-[2px] bg-primary"
+                placeholder={question.placeholder}
+                minLength={question.validation?.minLength}
+                maxLength={question.validation?.maxLength || 2048} // Default max length for security
+                min={question.validation?.min}
+                max={question.validation?.max}
+                pattern={question.validation?.pattern}
+                className={`
+                    w-full bg-transparent border-b-2 border-sw-text-secondary/20 
+                    py-4 text-2xl md:text-3xl font-medium outline-none transition-colors
+                    placeholder:text-sw-text-secondary/30
+                    focus:border-sw-primary
+                    font-sw-heading
+                `}
+            // autoFocus removed in favor of controlled focus in useEffect
             />
 
-            <div className="mt-4 flex items-center gap-2 opacity-0 animate-in fade-in slide-in-from-top-2 duration-700 delay-300 fill-mode-forwards">
-                <div className="flex items-center gap-1.5 text-sm md:text-base font-medium bg-primary/10 text-primary px-3 py-1.5 rounded-md">
-                    <span>Pressione</span>
-                    <span className="font-bold border border-primary/30 rounded px-1 min-w-[20px] text-center">↵</span>
-                    <span>Enter</span>
-                </div>
-            </div>
+            {/* Error Message */}
+            {error && (
+                <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 text-sm mt-2 font-medium"
+                >
+                    {error}
+                </motion.p>
+            )}
+
+            <p className="text-sm opacity-50 mt-4">
+                {/* Helper text or validation hints could go here */}
+                {question.type === 'email' && "Press Enter to continue"}
+                {question.type === 'text' && "Press Enter to continue"}
+                {question.type === 'number' && "Press Enter to continue"}
+                {question.type === 'url' && "Press Enter to continue"}
+            </p>
         </div>
     );
 }

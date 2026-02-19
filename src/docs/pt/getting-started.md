@@ -89,4 +89,15 @@ const schema: FormSchema = {
 };
 ```
 
+## Evitar Scroll Automático
+
+Por padrão, o formulário foca no primeiro input, o que pode fazer a página rolar. Você pode desativar isso:
+
+```tsx
+const schema: FormSchema = {
+  // ... outras props
+  disableAutoFocus: true
+};
+```
+
 Confira o [Playground](/docs/playground) para experimentar schemas e temas ao vivo.
