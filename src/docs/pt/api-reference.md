@@ -29,6 +29,8 @@ Personalize o visual e estilo do seu formulário.
 | `submitText` | `string` | - | Texto personalizado para o botão de enviar. |
 | `buttonVariant` | `'solid' \| 'outline'` | `'solid'` | Estilo dos botões de navegação (Sólido ou Contorno). |
 | `showPoweredBy` | `boolean` | `true` | Se deve mostrar o selo "Powered By". |
+| `poweredBy` | `string` | - | Texto personalizado para o selo. |
+| `poweredByUrl` | `string` | - | URL ao clicar no selo. |
 | `brandColor` | `string` | - | Cor para o nome da marca no selo. |
 
 ## Question (Pergunta)

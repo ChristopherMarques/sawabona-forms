@@ -70,6 +70,7 @@ export interface FormTheme {
     // Branding & UI
     poweredBy?: string; // e.g. "Sawabona Forms"
     showPoweredBy?: boolean;
+    poweredByUrl?: string; // Link when clicking the badge
     brandColor?: string; // Specific color for the brand name in badge
 
     // Controls

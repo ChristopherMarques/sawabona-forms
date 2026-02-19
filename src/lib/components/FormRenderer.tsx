@@ -155,7 +155,9 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                     {/* Powered By Badge */}
                     {theme.showPoweredBy !== false && (
                         <a
-                            href="#"
+                            href={theme.poweredByUrl || '#'}
+                            target={theme.poweredByUrl ? '_blank' : undefined}
+                            rel={theme.poweredByUrl ? 'noopener noreferrer' : undefined}
                             className="order-3 md:order-1 group flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/10 bg-black/20 hover:border-sw-primary/50 hover:bg-black/40 transition-all duration-300 cursor-pointer no-underline backdrop-blur-sm"
                         >
                             <span className="text-[10px] md:text-xs font-mono font-medium tracking-[0.2em] uppercase text-muted-foreground group-hover:text-muted-foreground/80 transition-colors">

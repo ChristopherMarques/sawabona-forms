@@ -29,6 +29,8 @@ Customize the look and feel of your form.
 | `submitText` | `string` | - | Custom text for the final submit button. |
 | `buttonVariant` | `'solid' \| 'outline'` | `'solid'` | Style of the navigation buttons. |
 | `showPoweredBy` | `boolean` | `true` | Whether to show the "Powered By" badge. |
+| `poweredBy` | `string` | - | Custom text for the badge. |
+| `poweredByUrl` | `string` | - | URL when clicking the badge. |
 | `brandColor` | `string` | - | Color for the brand name in the badge. |
 
 ## Question

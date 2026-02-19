@@ -46,7 +46,8 @@ const defaultSchemas: Record<string, FormSchema> = {
             borderRadius: '12px',
             fontFamily: 'Josefin Sans, sans-serif',
             showPoweredBy: true,
-            poweredBy: 'Sawabona Forms'
+            poweredBy: 'Sawabona Forms',
+            poweredByUrl: 'https://sawabona.tech'
         },
         i18n: {
             pressEnter: 'Press Enter'
@@ -91,7 +92,8 @@ const defaultSchemas: Record<string, FormSchema> = {
             submitText: 'Enviar Agora!',
             buttonVariant: 'outline',
             showPoweredBy: true,
-            poweredBy: 'Sawabona Forms'
+            poweredBy: 'Sawabona Forms',
+            poweredByUrl: 'https://sawabona.tech'
         },
         i18n: {
             pressEnter: 'Pressione Enter'
