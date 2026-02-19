@@ -44,8 +44,14 @@ const defaultSchemas: Record<string, FormSchema> = {
             backgroundColor: '#EFE9DB',
             textColor: '#171717',
             borderRadius: '12px',
-            fontFamily: 'Josefin Sans, sans-serif'
-        }
+            fontFamily: 'Josefin Sans, sans-serif',
+            showPoweredBy: true,
+            poweredBy: 'Sawabona Forms'
+        },
+        i18n: {
+            pressEnter: 'Press Enter'
+        },
+        disableAutoFocus: true,
     },
     pt: {
         id: 'playground-form-pt',
@@ -84,10 +90,15 @@ const defaultSchemas: Record<string, FormSchema> = {
             fontFamily: 'Josefin Sans, sans-serif',
             submitText: 'Enviar Agora!',
             buttonVariant: 'outline',
-            showPoweredBy: true
+            showPoweredBy: true,
+            poweredBy: 'Sawabona Forms'
+        },
+        i18n: {
+            pressEnter: 'Pressione Enter'
         },
         autoReload: true,
         reloadDelay: 3000,
+        disableAutoFocus: true,
     }
 };
 

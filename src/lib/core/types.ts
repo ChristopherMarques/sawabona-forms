@@ -83,12 +83,13 @@ export interface FormSchema {
     questions: Question[];
     theme?: FormTheme;
     i18n?: {
-        next: string;
-        back: string;
-        submit: string;
-        required: string;
-        optional: string;
-        stepInfo: string; // e.g., "Question {{current}} of {{total}}"
+        next?: string;
+        back?: string;
+        submit?: string;
+        required?: string;
+        optional?: string;
+        stepInfo?: string; // e.g., "Question {{current}} of {{total}}"
+        pressEnter?: string; // e.g., "Press Enter to continue"
     };
     // Behaviors
     autoReload?: boolean;

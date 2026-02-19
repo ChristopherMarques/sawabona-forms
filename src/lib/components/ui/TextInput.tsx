@@ -124,10 +124,10 @@ export function TextInput({ question }: { question: Question }) {
 
             <p className="text-sm opacity-50 mt-4">
                 {/* Helper text or validation hints could go here */}
-                {question.type === 'email' && "Press Enter to continue"}
-                {question.type === 'text' && "Press Enter to continue"}
-                {question.type === 'number' && "Press Enter to continue"}
-                {question.type === 'url' && "Press Enter to continue"}
+                {/* Helper text or validation hints could go here */}
+                {(question.type === 'email' || question.type === 'text' || question.type === 'number' || question.type === 'url') &&
+                    (schema.i18n?.pressEnter || "Press Enter to continue")
+                }
             </p>
         </div>
     );
