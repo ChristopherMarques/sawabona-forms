@@ -37,6 +37,13 @@ const defaultSchemas: Record<string, FormSchema> = {
                 type: 'number',
                 title: 'How many years of experience do you have?',
                 validation: { min: 0, max: 50 }
+            },
+            {
+                id: 'phone',
+                type: 'text',
+                title: 'What is your cell phone number?',
+                placeholder: '(XX) XXXXX-XXXX',
+                validation: { required: true, maskType: 'cellphone' }
             }
         ],
         theme: {
@@ -47,10 +54,21 @@ const defaultSchemas: Record<string, FormSchema> = {
             fontFamily: 'Josefin Sans, sans-serif',
             showPoweredBy: true,
             poweredBy: 'Sawabona Forms',
-            poweredByUrl: 'https://sawabona.tech'
+            poweredByUrl: 'https://sawabona.tech',
+            titleFont: 'Josefin Sans, serif',
+            titleFontSize: '2.5rem',
+            descriptionFont: 'Inter, sans-serif',
+            labelFont: 'Inter, sans-serif',
+            optionPadding: '1.25rem',
+            optionBorderRadius: '0.75rem',
+            optionBorderWidth: '2px',
+            optionActiveColor: '#716C4A',
+            optionGap: '1rem'
         },
         i18n: {
-            pressEnter: 'Press Enter'
+            pressEnter: 'Press Enter',
+            selectKey: 'Select',
+            hideSelectText: false
         },
         disableAutoFocus: true,
     },
@@ -81,6 +99,13 @@ const defaultSchemas: Record<string, FormSchema> = {
                 title: 'Quantos anos de experiência você tem?',
                 placeholder: 'Digite sua experiência aqui...',
                 validation: { min: 0, max: 50 }
+            },
+            {
+                id: 'celular',
+                type: 'text',
+                title: 'Qual é o seu celular?',
+                placeholder: '(XX) XXXXX-XXXX',
+                validation: { required: true, maskType: 'cellphone' }
             }
         ],
         theme: {
@@ -93,10 +118,16 @@ const defaultSchemas: Record<string, FormSchema> = {
             buttonVariant: 'outline',
             showPoweredBy: true,
             poweredBy: 'Sawabona Forms',
-            poweredByUrl: 'https://sawabona.tech'
+            poweredByUrl: 'https://sawabona.tech',
+            titleFont: 'Josefin Sans, serif',
+            optionPadding: '1.25rem',
+            optionBorderRadius: '0.75rem',
+            optionGap: '1rem'
         },
         i18n: {
-            pressEnter: 'Pressione Enter'
+            pressEnter: 'Pressione Enter',
+            selectKey: 'Selecionar',
+            hideSelectText: false
         },
         autoReload: true,
         reloadDelay: 3000,

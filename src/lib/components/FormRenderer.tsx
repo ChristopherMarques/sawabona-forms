@@ -43,7 +43,18 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
         '--color-sw-text-secondary': theme.textColor,
         '--font-sw-heading': theme.fontFamily || 'inherit',
         '--font-sw-body': theme.fontFamily || 'inherit',
-    } as CSSProperties;
+        ...(theme.titleFont && { '--font-sw-title': theme.titleFont }),
+        ...(theme.descriptionFont && { '--font-sw-description': theme.descriptionFont }),
+        ...(theme.labelFont && { '--font-sw-label': theme.labelFont }),
+        ...(theme.titleFontSize && { '--size-sw-title': theme.titleFontSize }),
+        ...(theme.descriptionFontSize && { '--size-sw-description': theme.descriptionFontSize }),
+        ...(theme.labelFontSize && { '--size-sw-label': theme.labelFontSize }),
+        ...(theme.optionPadding && { '--sw-option-padding': theme.optionPadding }),
+        ...(theme.optionBorderRadius && { '--sw-option-radius': theme.optionBorderRadius }),
+        ...(theme.optionBorderWidth && { '--sw-option-border': theme.optionBorderWidth }),
+        ...(theme.optionGap && { '--sw-option-gap': theme.optionGap }),
+        ...(theme.optionActiveColor && { '--sw-option-active': theme.optionActiveColor }),
+    } as React.CSSProperties;
 
     // Enhanced Button Styles
     const isOutline = theme.buttonVariant === 'outline';

@@ -33,6 +33,27 @@ Customize the look and feel of your form.
 | `poweredByUrl` | `string` | - | URL when clicking the badge. |
 | `brandColor` | `string` | - | Color for the brand name in the badge. |
 
+### Typography & Fonts
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `titleFont` | `string` | Custom font family for question titles. |
+| `descriptionFont` | `string` | Custom font family for descriptions. |
+| `labelFont` | `string` | Custom font family for input labels. |
+| `titleFontSize` | `string` | Custom font size for titles (e.g. `2rem`). |
+| `descriptionFontSize` | `string` | Custom font size for descriptions. |
+| `labelFontSize` | `string` | Custom font size for labels and options. |
+
+### Options Styling
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `optionPadding` | `string` | Padding inside multiple-choice bounds. |
+| `optionBorderRadius` | `string` | Border radius for multiple-choice buttons. |
+| `optionBorderWidth` | `string` | Border width for multiple-choice bounds. |
+| `optionActiveColor` | `string` | Active state border and background tint color. |
+| `optionGap` | `string` | Gap spacing between option items. |
+
 ## Question
 
 Defines a single step or input field.
@@ -69,3 +90,14 @@ Defines a single step or input field.
 | `min` | `number` | Minimum value (for numbers) or length. |
 | `max` | `number` | Maximum value (for numbers) or length. |
 | `pattern` | `string` | Regex pattern for text inputs. |
+| `maskType` | `'phone' \| 'cellphone' \| 'cpf' \| 'cnpj' \| 'cep' \| 'custom'` | Built-in numeric input mask presets. |
+| `mask` | `string` | Used when `maskType` is `custom`. E.g., `(##) ####-####`. |
+
+## Form Schema Extras (i18n)
+
+When overriding `i18n`, additional keys exist to customize standard options labels.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `selectKey` | `string` | Override the default `Select` text displayed on option hints. |
+| `hideSelectText` | `boolean` | Hide the `Select Key N` hint text entirely. |

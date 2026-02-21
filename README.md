@@ -136,6 +136,33 @@ Isso garante que sua lógica permaneça limpa e seu conteúdo seja facilmente ed
 | `reloadDelay` | `number` | (Opcional) Tempo em milissegundos para aguardar antes de reiniciar (Padrão: 3000). |
 | `disableAutoFocus` | `boolean` | (Opcional) Desativar scroll automático no carregamento (Padrão: false). |
 
+### `FormTheme` (Customização Avançada)
+
+| Propriedade | Tipo | Descrição |
+|-------------|------|-----------|
+| `primaryColor`, `backgroundColor`, `textColor` | `string` | Cores base do formulário. |
+| `fontFamily` | `string` | Fonte padrão para o formulário. |
+| `titleFont`, `descriptionFont`, `labelFont` | `string` | Fontes específicas para título, descrição e labels. |
+| `titleFontSize`, `descriptionFontSize`, `labelFontSize` | `string` | (Opcional) Tamanhos de fonte customizados via CSS units (ex: `2rem`). |
+| `optionPadding`, `optionBorderRadius`, `optionBorderWidth`, `optionGap`, `optionActiveColor` | `string` | Estilização avançada das opções de múltipla escolha ou opções únicas. |
+
+### `ValidationRules` (Validação e Máscaras)
+
+| Propriedade | Tipo | Descrição |
+|-------------|------|-----------|
+| `required` | `boolean` | Campo obrigatório. |
+| `maskType` | `'phone' \| 'cellphone' \| 'cpf' \| 'cnpj' \| 'cep' \| 'custom'` | Máscaras de entrada pré-definidas para formatação automática (somente inputs numéricos padrão). |
+| `mask` | `string` | Padrão customizado de formatação via interface `#` (Ex: `(##) ####-####`). Apenas funciona quando `maskType` for definido como `'custom'`. |
+| `pattern` | `string` | Padrão regex para ditar estritamente a validação. |
+
+### `i18n` (Internacionalização Extra)
+
+| Propriedade | Tipo | Descrição |
+|-------------|------|-----------|
+| `next`, `back`, `submit` | `string` | Textos padronizados de navegação. |
+| `selectKey` | `string` | Personalização do texto das opções (O padrão é "Select"). |
+| `hideSelectText` | `boolean` | Esconde inteiramente o indicador e instrução "Select Key X" dos botões. |
+
 ---
 
 ## 🤝 Contribuindo

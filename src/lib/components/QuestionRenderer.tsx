@@ -49,6 +49,10 @@ export function QuestionRenderer({ question }: { question: Question }) {
                 <motion.h2
                     variants={itemVariants}
                     className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-pretty mt-2 font-sw-heading"
+                    style={{
+                        ...(schema.theme?.titleFont && { fontFamily: 'var(--font-sw-title)' }),
+                        ...(schema.theme?.titleFontSize && { fontSize: 'var(--size-sw-title)' })
+                    }}
                 >
                     {replaceVariables(question.title)} <span className="text-sw-primary">*</span>
                 </motion.h2>
@@ -57,6 +61,10 @@ export function QuestionRenderer({ question }: { question: Question }) {
                     <motion.p
                         variants={itemVariants}
                         className="text-lg md:text-xl text-muted-foreground font-normal leading-relaxed max-w-2xl mt-2"
+                        style={{
+                            ...(schema.theme?.descriptionFont && { fontFamily: 'var(--font-sw-description)' }),
+                            ...(schema.theme?.descriptionFontSize && { fontSize: 'var(--size-sw-description)' })
+                        }}
                     >
                         {replaceVariables(question.description)}
                     </motion.p>

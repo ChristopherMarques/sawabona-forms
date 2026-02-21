@@ -1,7 +1,7 @@
 {
   "name": "@sawabona/forms",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "./dist/sawabona-forms.umd.js",
   "module": "./dist/sawabona-forms.es.js",
@@ -68,7 +68,7 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.6",
-    "vite-plugin-dts": "^4.4.0"
+    "vite-plugin-dts": "^3.9.1"
   },
   "browserslist": [
     "defaults",

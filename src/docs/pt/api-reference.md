@@ -33,6 +33,27 @@ Personalize o visual e estilo do seu formulário.
 | `poweredByUrl` | `string` | - | URL ao clicar no selo. |
 | `brandColor` | `string` | - | Cor para o nome da marca no selo. |
 
+### Tipografia e Fontes
+
+| Propriedade | Tipo | Descrição |
+|-------------|------|-----------|
+| `titleFont` | `string` | Fonte customizada para os títulos. |
+| `descriptionFont` | `string` | Fonte customizada para as descrições. |
+| `labelFont` | `string` | Fonte customizada para inputs e labels. |
+| `titleFontSize` | `string` | Tamanho da fonte customizado do título (ex. `2rem`). |
+| `descriptionFontSize` | `string` | Tamanho da fonte customizado da descrição. |
+| `labelFontSize` | `string` | Tamanho da fonte customizado de labels e opções. |
+
+### Estilização de Opções Multiescolha
+
+| Propriedade | Tipo | Descrição |
+|-------------|------|-----------|
+| `optionPadding` | `string` | Preenchimento interno (padding) nas opções. |
+| `optionBorderRadius` | `string` | Arredondamento da borda dos botões de opções. |
+| `optionBorderWidth` | `string` | Espessura da borda. |
+| `optionActiveColor` | `string` | Cor de destaque no fundo e borda quando a opção estiver ativa. |
+| `optionGap` | `string` | Espaçamento (`gap`) entre as opções da lista. |
+
 ## Question (Pergunta)
 
 Define um único passo ou campo de entrada.
@@ -69,3 +90,14 @@ Define um único passo ou campo de entrada.
 | `min` | `number` | Valor mínimo (números) ou tamanho mínimo. |
 | `max` | `number` | Valor máximo (números) ou tamanho máximo. |
 | `pattern` | `string` | Padrão Regex para inputs de texto. |
+| `maskType` | `'phone' \| 'cellphone' \| 'cpf' \| 'cnpj' \| 'cep' \| 'custom'` | Máscaras formatadas automaticamente baseadas no tipo fornecido (opera sob campos não formatados). |
+| `mask` | `string` | Define o padrão de máscara interativo em caso de `maskType` ser designado como `custom` (Ex: `#-#.#`). |
+
+## Personalização Extra de i18n
+
+Ao definir o bloco de `i18n`, chaves adicionais podem ser empregues para as opções.
+
+| Propriedade | Tipo | Descrição |
+|-------------|------|-----------|
+| `selectKey` | `string` | Sobrescreve a dica padrão de `Select` (ou "Selecionar") exibida nas opções em "Select Key N". |
+| `hideSelectText` | `boolean` | Oculta integralmente o informativo `Select Key N` / `Selecionar Tecla N` dos botões. |

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
 export function SelectInput({ question }: { question: Question }) {
-    const { answers, setAnswer, nextStep } = useFormContext();
+    const { answers, setAnswer, nextStep, schema } = useFormContext();
     const value = (answers[question.id] as string) || '';
 
     const handleSelect = (optionValue: string | number | boolean) => {
@@ -29,7 +29,7 @@ export function SelectInput({ question }: { question: Question }) {
     }, [question.options, question.id]);
 
     return (
-        <div className="flex flex-col gap-3 w-full max-w-xl">
+        <div className="flex flex-col gap-3 w-full max-w-xl" style={{ gap: 'var(--sw-option-gap, 0.75rem)' }}>
             {question.options?.map((option, index) => {
                 const isSelected = Array.isArray(value)
                     ? value.includes(option.value)
@@ -50,20 +50,38 @@ export function SelectInput({ question }: { question: Question }) {
                                 : 'border-sw-text-secondary/10 hover:border-sw-primary/50 hover:bg-sw-primary/5'
                             }
                         `}
+                        style={{
+                            padding: 'var(--sw-option-padding, 1rem)',
+                            borderRadius: 'var(--sw-option-radius, 0.5rem)',
+                            borderWidth: 'var(--sw-option-border, 2px)',
+                            ...(isSelected && schema.theme?.optionActiveColor ? {
+                                borderColor: 'var(--sw-option-active)'
+                            } : {})
+                        }}
                     >
-                        <span className="text-lg font-medium flex items-center gap-3">
+                        <span className="text-lg font-medium flex items-center gap-3" style={{
+                            ...(schema.theme?.labelFont && { fontFamily: 'var(--font-sw-label)' }),
+                            ...(schema.theme?.labelFontSize && { fontSize: 'var(--size-sw-label)' })
+                        }}>
                             <span className={`
-                                w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors
+                                flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors
                                 ${isSelected ? 'border-sw-primary bg-sw-primary' : 'border-sw-text-secondary/30 group-hover:border-sw-primary/50'}
-                            `}>
+                            `} style={{
+                                    ...(isSelected && schema.theme?.optionActiveColor ? {
+                                        borderColor: 'var(--sw-option-active)',
+                                        backgroundColor: 'var(--sw-option-active)'
+                                    } : {})
+                                }}>
                                 {isSelected && <Check size={14} className="text-sw-background" />}
                             </span>
                             {option.label}
                         </span>
 
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-mono uppercase tracking-widest text-sw-text-secondary/50">
-                            Select <span className="hidden md:inline">Key {index + 1}</span>
-                        </span>
+                        {!schema.i18n?.hideSelectText && (
+                            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-mono uppercase tracking-widest text-sw-text-secondary/50">
+                                {schema.i18n?.selectKey || "Select"} <span className="hidden md:inline">Key {index + 1}</span>
+                            </span>
+                        )}
                     </motion.button>
                 );
             })}

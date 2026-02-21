@@ -51,7 +51,7 @@ export default function Landing() {
                 {/* Hero */}
                 <section className="relative pt-40 pb-32 px-6 max-w-7xl mx-auto text-center z-10">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#716C4A]/5 border border-[#716C4A]/10 text-[#716C4A] text-xs font-medium mb-8 backdrop-blur-sm animate-fade-in-up">
-                        <Terminal size={12} className="text-[#716C4A]" /> {t('landing.beta', 'v1.0.2 Beta Now Available')}
+                        <Terminal size={12} className="text-[#716C4A]" /> {t('landing.beta', 'v1.0.3 Beta Now Available')}
                     </div>
 
                     <h1 className="text-5xl md:text-8xl font-bold tracking-tight mb-8 text-[#171717] whitespace-pre-line">

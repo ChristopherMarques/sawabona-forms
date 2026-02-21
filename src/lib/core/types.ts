@@ -41,6 +41,8 @@ export interface ValidationRules {
     minLength?: number;
     maxLength?: number;
     pattern?: string;
+    mask?: string;
+    maskType?: 'phone' | 'cellphone' | 'cpf' | 'cnpj' | 'cep' | 'custom';
     custom?: (value: any) => string | boolean;
 }
 
@@ -76,6 +78,21 @@ export interface FormTheme {
     // Controls
     submitText?: string; // Custom text for submit button
     buttonVariant?: 'solid' | 'outline';
+
+    // Fonts & Sizing
+    titleFont?: string;
+    descriptionFont?: string;
+    labelFont?: string;
+    titleFontSize?: string;
+    descriptionFontSize?: string;
+    labelFontSize?: string;
+
+    // Options Styling
+    optionPadding?: string;
+    optionBorderRadius?: string;
+    optionBorderWidth?: string;
+    optionActiveColor?: string;
+    optionGap?: string;
 }
 
 export interface FormSchema {
@@ -91,6 +108,8 @@ export interface FormSchema {
         optional?: string;
         stepInfo?: string; // e.g., "Question {{current}} of {{total}}"
         pressEnter?: string; // e.g., "Press Enter to continue"
+        selectKey?: string; // e.g., "Press" or "Selecionar"
+        hideSelectText?: boolean; // Hides the "Select Key X" entirely
     };
     // Behaviors
     autoReload?: boolean;

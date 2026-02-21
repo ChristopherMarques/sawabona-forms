@@ -2,6 +2,7 @@ import { useRef, useEffect, type KeyboardEvent, type ChangeEvent } from 'react';
 import type { Question } from '../../core/types';
 import { useFormContext } from '../../core/FormContext';
 import { motion } from 'framer-motion';
+import { applyMask } from '../../utils';
 
 export function TextInput({ question }: { question: Question }) {
     const { answers, setAnswer, nextStep, schema } = useFormContext();
@@ -25,6 +26,11 @@ export function TextInput({ question }: { question: Question }) {
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         let val = e.target.value;
+
+        // Apply mask if configured
+        if (question.validation?.maskType || question.validation?.mask) {
+            val = applyMask(val, question.validation.maskType, question.validation.mask);
+        }
 
         // Security: Enforce max length to prevent DoS (default 2048 chars if not specified)
         const MAX_SAFE_LENGTH = question.validation?.maxLength || 2048;
@@ -108,6 +114,10 @@ export function TextInput({ question }: { question: Question }) {
                     focus:border-sw-primary
                     font-sw-heading
                 `}
+                style={{
+                    ...(schema.theme?.labelFont && { fontFamily: 'var(--font-sw-label)' }),
+                    ...(schema.theme?.labelFontSize && { fontSize: 'var(--size-sw-label)' })
+                }}
             // autoFocus removed in favor of controlled focus in useEffect
             />
 
