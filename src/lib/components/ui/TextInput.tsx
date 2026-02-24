@@ -2,7 +2,7 @@ import { useRef, useEffect, type KeyboardEvent, type ChangeEvent } from 'react';
 import type { Question } from '../../core/types';
 import { useFormContext } from '../../core/FormContext';
 import { motion } from 'framer-motion';
-import { applyMask } from '../../utils';
+import { applyMask, cn } from '../../utils';
 
 export function TextInput({ question }: { question: Question }) {
     const { answers, setAnswer, nextStep, schema } = useFormContext();
@@ -107,13 +107,14 @@ export function TextInput({ question }: { question: Question }) {
                 min={question.validation?.min}
                 max={question.validation?.max}
                 pattern={question.validation?.pattern}
-                className={`
-                    w-full bg-transparent border-b-2 border-sw-text-secondary/20 
+                className={cn(
+                    `w-full bg-transparent border-b-2 border-sw-text-secondary/20 
                     py-4 text-2xl md:text-3xl font-medium outline-none transition-colors
                     placeholder:text-sw-text-secondary/30
                     focus:border-sw-primary
-                    font-sw-heading
-                `}
+                    font-sw-heading`,
+                    schema.theme?.customClasses?.input
+                )}
                 style={{
                     ...(schema.theme?.labelFont && { fontFamily: 'var(--font-sw-label)' }),
                     ...(schema.theme?.labelFontSize && { fontSize: 'var(--size-sw-label)' })

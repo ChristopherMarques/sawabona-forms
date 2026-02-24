@@ -58,6 +58,7 @@ export interface Question {
     defaultValue?: any;
     // UI Customizations specific to this question
     layout?: 'split' | 'centered' | 'full';
+    multiple?: boolean;
     imageUrl?: string;
     minLabel?: string;
     maxLabel?: string;
@@ -93,6 +94,18 @@ export interface FormTheme {
     optionBorderWidth?: string;
     optionActiveColor?: string;
     optionGap?: string;
+
+    // Tailwind Overrides
+    customClasses?: {
+        container?: string;
+        title?: string;
+        description?: string;
+        input?: string;
+        option?: string;
+        optionActive?: string;
+        buttonPrimary?: string;
+        buttonSecondary?: string;
+    };
 }
 
 export interface FormSchema {
@@ -115,6 +128,9 @@ export interface FormSchema {
     autoReload?: boolean;
     reloadDelay?: number; // milliseconds, default 5000
     disableAutoFocus?: boolean; // prevent scroll jump on load
+    layoutSettings?: {
+        internalScroll?: boolean; // Default true. Sets h-full overflow-hidden vs min-h-screen
+    };
 }
 
 export type AnswerValue = string | number | boolean | string[] | number[];

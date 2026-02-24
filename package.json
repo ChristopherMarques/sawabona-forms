@@ -1,7 +1,7 @@
 {
   "name": "@sawabona/forms",
   "private": false,
-  "version": "1.0.3",
+  "version": "1.0.7",
   "type": "module",
   "main": "./dist/sawabona-forms.umd.js",
   "module": "./dist/sawabona-forms.es.js",
@@ -23,7 +23,8 @@
     "build": "tsc -b && vite build",
     "build:lib": "tsc -b && vite build -c vite.lib.config.ts && node scripts/build-css.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "clsx": "^2.1.1",

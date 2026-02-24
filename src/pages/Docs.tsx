@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 import 'highlight.js/styles/github-dark.css'; // Keep dark syntax highlighting or switch to a lighter one if preferred
 import { PageTransition } from '../components/PageTransition';
 import { Playground } from '../components/Playground';
+import llmTxt from '../docs/llm.txt?raw';
+import llmMd from '../docs/llm.md?raw';
 
 // Glob all markdown files from all subdirectories
 const DOCS_modules = import.meta.glob('../docs/**/*.md', { query: '?raw', import: 'default' });
@@ -62,12 +64,39 @@ function DocViewer() {
             prose-td:p-4 prose-td:text-sm prose-td:border-b prose-td:border-[#716C4A]/10 prose-td:align-top
             prose-tr:hover:bg-[#716C4A]/5 transition-colors
         ">
-            <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeHighlight]}
-            >
-                {content}
-            </ReactMarkdown>
+            {content.includes('<!-- DOWNLOAD_BUTTONS -->') ? (
+                <>
+                    <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeHighlight]}
+                    >
+                        {content.split('<!-- DOWNLOAD_BUTTONS -->')[0]}
+                    </ReactMarkdown>
+                    <div className="flex flex-col sm:flex-row gap-4 my-8 not-prose">
+                        <button
+                            onClick={() => window.dispatchEvent(new CustomEvent('download-llm', { detail: 'md' }))}
+                            className="flex items-center justify-center gap-2 px-6 py-3 bg-[#716C4A] text-[#EFE9DB] rounded-lg font-medium hover:bg-[#5a563b] transition-colors shadow-sm"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                            sawabona-forms.md
+                        </button>
+                        <button
+                            onClick={() => window.dispatchEvent(new CustomEvent('download-llm', { detail: 'txt' }))}
+                            className="flex items-center justify-center gap-2 px-6 py-3 bg-[#EFE9DB] text-[#716C4A] border-2 border-[#716C4A] rounded-lg font-medium hover:bg-[#716C4A]/10 transition-colors shadow-sm"
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                            sawabona-forms.txt
+                        </button>
+                    </div>
+                </>
+            ) : (
+                <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeHighlight]}
+                >
+                    {content}
+                </ReactMarkdown>
+            )}
         </article>
     );
 }
@@ -84,6 +113,32 @@ export default function Docs() {
 
     const changeLanguage = (lng: string) => {
         i18n.changeLanguage(lng);
+    };
+
+    useEffect(() => {
+        const handleDownload = (e: Event) => {
+            const type = (e as CustomEvent).detail;
+            if (type === 'md') {
+                downloadFile(llmMd, 'sawabona-forms.md');
+            } else if (type === 'txt') {
+                downloadFile(llmTxt, 'sawabona-forms.txt');
+            }
+        };
+
+        window.addEventListener('download-llm', handleDownload);
+        return () => window.removeEventListener('download-llm', handleDownload);
+    }, []);
+
+    const downloadFile = (content: string, filename: string) => {
+        const blob = new Blob([content], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     };
 
     return (
@@ -129,12 +184,17 @@ export default function Docs() {
                             <Link to="/docs/playground" className={`block px-2 py-1.5 rounded-md text-sm hover:text-[#171717] hover:bg-[#716C4A]/5 transition-colors ${location.pathname === '/docs/playground' ? 'text-[#716C4A] bg-[#716C4A]/10 font-medium' : 'text-[#716C4A]/80'}`}>
                                 {t('sidebar.playground', 'Playground')}
                             </Link>
+
+                            <p className="text-xs font-bold text-[#716C4A] uppercase tracking-wider mt-6 mb-2 px-2">AIs / LLMs</p>
+                            <Link to="/docs/llms" className={`block px-2 py-1.5 rounded-md text-sm hover:text-[#171717] hover:bg-[#716C4A]/5 transition-colors ${location.pathname === '/docs/llms' ? 'text-[#716C4A] bg-[#716C4A]/10 font-medium' : 'text-[#716C4A]/80'}`}>
+                                {t('sidebar.llms_guide', 'LLMs Guide')}
+                            </Link>
                         </nav>
 
                         {/* Footer / User / Env */}
                         <div className="mt-auto pt-6 border-t border-[#716C4A]/10">
                             <div className="flex items-center justify-between gap-4 text-xs font-mono text-[#716C4A]/80 mb-4">
-                                <span>v1.0.3</span>
+                                <span>v1.0.7</span>
                                 <div className="flex gap-2 items-center">
                                     <Globe size={12} className="text-[#716C4A]" />
                                     <button onClick={() => changeLanguage('en')} className={`hover:text-[#171717] transition-colors ${i18n.language === 'en' ? 'text-[#716C4A] font-bold' : ''}`}>EN</button>

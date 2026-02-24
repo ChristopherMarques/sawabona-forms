@@ -14,6 +14,7 @@ O objeto raiz da definição do seu formulário.
 | `theme` | `FormTheme` | Não | Opções de personalização da aparência. |
 | `i18n` | `object` | Não | Sobrescreve textos (próximo, voltar, pressEnter). |
 | `disableAutoFocus` | `boolean` | Não | Evita scroll/foco automático ao carregar. |
+| `layoutSettings.internalScroll` | `boolean` | Não | Substitui o comportamento de rolagem interno. Se `true` (padrão), o formulário rola dentro de seu próprio contêiner. Se `false`, permite que a página global role naturalmente. |
 
 ## FormTheme (Tema)
 
@@ -53,6 +54,7 @@ Personalize o visual e estilo do seu formulário.
 | `optionBorderWidth` | `string` | Espessura da borda. |
 | `optionActiveColor` | `string` | Cor de destaque no fundo e borda quando a opção estiver ativa. |
 | `optionGap` | `string` | Espaçamento (`gap`) entre as opções da lista. |
+| `customClasses` | `object` | Configuração mestre para injeção de classes CSS (como Tailwind). Aceita as chaves: `container`, `title`, `description`, `input`, `option`, `optionActive`, `buttonPrimary`, `buttonSecondary`. |
 
 ## Question (Pergunta)
 
@@ -67,6 +69,7 @@ Define um único passo ou campo de entrada.
 | `placeholder` | `string` | Não | Texto de exemplo para inputs. |
 | `validation` | `object` | Não | Regras de validação (obrigatório, min, max, etc.). |
 | `options` | `Option[]` | Não | Obrigatório para `select`, `multi-select`. |
+| `multiple` | `boolean` | Não | Flag para acionar modo múltipla-escolha em perguntas `select`. |
 
 ## Tipos de Pergunta
 

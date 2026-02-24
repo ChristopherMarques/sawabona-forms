@@ -14,6 +14,7 @@ The root object of your form definition.
 | `theme` | `FormTheme` | No | Customization options for the form's appearance. |
 | `i18n` | `object` | No | Override labels (next, back, submit, pressEnter). |
 | `disableAutoFocus` | `boolean` | No | Prevent auto-scroll/focus on load. |
+| `layoutSettings.internalScroll` | `boolean` | No | Overrides the internal form scrolling behavior. If `true` (default), the form scrolls inside its own container. If `false`, it lets the parent window scroll naturally. |
 
 ## FormTheme
 
@@ -53,6 +54,7 @@ Customize the look and feel of your form.
 | `optionBorderWidth` | `string` | Border width for multiple-choice bounds. |
 | `optionActiveColor` | `string` | Active state border and background tint color. |
 | `optionGap` | `string` | Gap spacing between option items. |
+| `customClasses` | `object` | A master configuration for CSS classes injection (like Tailwind classes). Accepts keys: `container`, `title`, `description`, `input`, `option`, `optionActive`, `buttonPrimary`, `buttonSecondary`. |
 
 ## Question
 
@@ -67,6 +69,7 @@ Defines a single step or input field.
 | `placeholder` | `string` | No | Placeholder text for inputs. |
 | `validation` | `object` | No | Validation rules (required, min, max, etc.). |
 | `options` | `Option[]` | No | Required for `select`, `multi-select`. |
+| `multiple` | `boolean` | No | Explicit flag to enable multiple choice selection on `select` questions. |
 
 ## Question Types
 

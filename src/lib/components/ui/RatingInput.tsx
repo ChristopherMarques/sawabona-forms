@@ -3,9 +3,10 @@ import type { Question } from '../../core/types';
 import { useFormContext } from '../../core/FormContext';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { cn } from '../../utils';
 
 export function RatingInput({ question }: { question: Question }) {
-    const { answers, setAnswer } = useFormContext();
+    const { answers, setAnswer, schema } = useFormContext();
     const value = (answers[question.id] as number) || 0;
     const max = Math.min(question.validation?.max || 5, 20); // Security cap to prevent DoS
 
@@ -25,7 +26,11 @@ export function RatingInput({ question }: { question: Question }) {
                             onClick={() => setAnswer(question.id, ratingValue)}
                             whileHover={{ scale: 1.2, rotate: 5 }}
                             whileTap={{ scale: 0.9 }}
-                            className="focus:outline-none"
+                            className={cn(
+                                "focus:outline-none",
+                                schema.theme?.customClasses?.option,
+                                isActive && schema.theme?.customClasses?.optionActive
+                            )}
                         >
                             <Star
                                 className={`w-12 h-12 md:w-16 md:h-16 transition-all duration-300 ${isActive

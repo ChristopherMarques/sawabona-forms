@@ -33,6 +33,16 @@ const defaultSchemas: Record<string, FormSchema> = {
                 ]
             },
             {
+                id: 'tools',
+                type: 'multi-select',
+                title: 'Which tools do you use?',
+                options: [
+                    { value: 'react', label: 'React / Next.js' },
+                    { value: 'node', label: 'Node.js' },
+                    { value: 'figma', label: 'Figma' }
+                ]
+            },
+            {
                 id: 'experience',
                 type: 'number',
                 title: 'How many years of experience do you have?',
@@ -91,6 +101,16 @@ const defaultSchemas: Record<string, FormSchema> = {
                     { value: 'dev', label: 'Desenvolvedor' },
                     { value: 'designer', label: 'Designer' },
                     { value: 'pm', label: 'Gerente de Produto' }
+                ]
+            },
+            {
+                id: 'ferramentas',
+                type: 'multi-select',
+                title: 'Quais ferramentas você usa?',
+                options: [
+                    { value: 'react', label: 'React / Next.js' },
+                    { value: 'node', label: 'Node.js' },
+                    { value: 'figma', label: 'Figma' }
                 ]
             },
             {

@@ -5,6 +5,7 @@ import { FormContext } from '../core/FormContext';
 import { QuestionRenderer } from './QuestionRenderer';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
+import { cn } from '../utils';
 
 interface FormRendererProps {
     schema: FormSchema;
@@ -75,6 +76,9 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
 
     const { autoReload, reloadDelay = 3000 } = schema;
 
+    // Layout logic: internal scroll vs natural page scroll
+    const isInternalScroll = schema.layoutSettings?.internalScroll !== false;
+
     // Auto-reload effect
     useEffect(() => {
         if (formState.isCompleted && autoReload) {
@@ -88,7 +92,11 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
     if (formState.isCompleted) {
         return (
             <div
-                className="flex flex-col items-center justify-center h-full w-full p-8 text-center relative overflow-hidden"
+                className={cn(
+                    "flex flex-col items-center justify-center w-full p-8 text-center relative",
+                    isInternalScroll ? "h-full overflow-hidden" : "min-h-screen",
+                    theme.customClasses?.container
+                )}
                 style={containerStyles}
             >
                 {/* Auto-reload progress bar */}
@@ -125,7 +133,11 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
     return (
         <FormContext.Provider value={{ ...formState, schema }}>
             <div
-                className="w-full h-full flex flex-col relative overflow-hidden transition-colors duration-700"
+                className={cn(
+                    "w-full flex flex-col relative transition-colors duration-700",
+                    isInternalScroll ? "h-full overflow-hidden" : "min-h-screen",
+                    theme.customClasses?.container
+                )}
                 style={containerStyles}
             >
                 {/* Minimal Top Progress Bar */}
@@ -143,22 +155,33 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                     />
                 </div>
 
-                {/* Main Centered Content */}
-                <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-12 w-full max-w-5xl mx-auto z-10">
-                    <AnimatePresence mode="wait">
-                        {currentQuestion && (
-                            <motion.div
-                                key={currentQuestion.id}
-                                initial={{ opacity: 0, y: 40 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -40 }}
-                                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                                className="w-full"
-                            >
-                                <QuestionRenderer question={currentQuestion} />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                {/* Main Content */}
+                <div className={cn(
+                    "flex-1 w-full relative z-10 flex flex-col px-6 md:px-12",
+                    isInternalScroll ? "overflow-y-auto" : ""
+                )} style={{ scrollbarWidth: 'none' }}>
+                    {/* Top Spacer for centering */}
+                    <div className="flex-1 flex-shrink-0 min-h-[2rem]" />
+
+                    <div className="w-full max-w-5xl mx-auto py-4">
+                        <AnimatePresence mode="wait">
+                            {currentQuestion && (
+                                <motion.div
+                                    key={currentQuestion.id}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -40 }}
+                                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                                    className="w-full"
+                                >
+                                    <QuestionRenderer question={currentQuestion} />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Bottom Spacer for centering */}
+                    <div className="flex-1 flex-shrink-0 min-h-[2rem]" />
                 </div>
 
                 {/* Footer / Navigation */}
@@ -190,7 +213,10 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                             disabled={formState.history.length === 0}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all hover:bg-white/5 rounded-full"
+                            className={cn(
+                                "w-12 h-12 md:w-14 md:h-14 flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all hover:bg-white/5 rounded-full",
+                                theme.customClasses?.buttonSecondary
+                            )}
                             style={secondaryButtonStyles}
                         >
                             <ChevronLeft size={24} />
@@ -200,7 +226,10 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                             onClick={formState.nextStep}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="px-8 py-3 md:px-10 md:py-4 text-lg font-bold shadow-2xl flex items-center gap-3 transition-all rounded-lg"
+                            className={cn(
+                                "px-8 py-3 md:px-10 md:py-4 text-lg font-bold shadow-2xl flex items-center gap-3 transition-all rounded-lg",
+                                theme.customClasses?.buttonPrimary
+                            )}
                             style={primaryButtonStyles}
                         >
                             <span>
