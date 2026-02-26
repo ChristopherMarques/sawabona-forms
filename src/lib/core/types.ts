@@ -103,6 +103,7 @@ export interface FormTheme {
         input?: string;
         option?: string;
         optionActive?: string;
+        buttonContainer?: string;
         buttonPrimary?: string;
         buttonSecondary?: string;
     };

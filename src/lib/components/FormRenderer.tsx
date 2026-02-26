@@ -206,20 +206,23 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                         </a>
                     )}
 
-                    {/* Navigation Buttons - Right aligned */}
-                    <div className="flex items-center gap-4 order-2 md:order-3 ml-auto">
+                    {/* Navigation Buttons - Right aligned (default) */}
+                    <div className={cn(
+                        "flex items-center justify-end gap-3 md:gap-4 order-2 md:order-3 w-full md:w-auto md:flex-1",
+                        theme.customClasses?.buttonContainer
+                    )}>
                         <motion.button
                             onClick={formState.prevStep}
                             disabled={formState.history.length === 0}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className={cn(
-                                "w-12 h-12 md:w-14 md:h-14 flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all hover:bg-white/5 rounded-full",
+                                "w-10 h-10 md:w-12 md:h-12 flex items-center justify-center disabled:opacity-0 disabled:pointer-events-none transition-all hover:bg-black/5 dark:hover:bg-white/5 rounded-full",
                                 theme.customClasses?.buttonSecondary
                             )}
                             style={secondaryButtonStyles}
                         >
-                            <ChevronLeft size={24} />
+                            <ChevronLeft size={20} />
                         </motion.button>
 
                         <motion.button
@@ -227,7 +230,7 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className={cn(
-                                "px-8 py-3 md:px-10 md:py-4 text-lg font-bold shadow-2xl flex items-center gap-3 transition-all rounded-lg",
+                                "px-6 py-2.5 md:px-8 md:py-3 text-base md:text-lg font-semibold shadow-lg flex items-center gap-2 transition-all rounded-lg",
                                 theme.customClasses?.buttonPrimary
                             )}
                             style={primaryButtonStyles}
@@ -237,7 +240,7 @@ export function FormRenderer({ schema, onSubmit }: FormRendererProps) {
                                     ? (theme.submitText || i18n.submit)
                                     : i18n.next}
                             </span>
-                            {formState.currentStepId !== schema.questions[schema.questions.length - 1].id && <ChevronRight size={20} strokeWidth={3} />}
+                            {formState.currentStepId !== schema.questions[schema.questions.length - 1].id && <ChevronRight size={18} strokeWidth={2.5} />}
                         </motion.button>
                     </div>
                 </div>

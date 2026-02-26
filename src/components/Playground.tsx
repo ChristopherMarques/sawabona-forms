@@ -73,7 +73,10 @@ const defaultSchemas: Record<string, FormSchema> = {
             optionBorderRadius: '0.75rem',
             optionBorderWidth: '2px',
             optionActiveColor: '#716C4A',
-            optionGap: '1rem'
+            optionGap: '1rem',
+            customClasses: {
+                buttonContainer: 'justify-between'
+            }
         },
         i18n: {
             pressEnter: 'Press Enter',
@@ -142,7 +145,10 @@ const defaultSchemas: Record<string, FormSchema> = {
             titleFont: 'Josefin Sans, serif',
             optionPadding: '1.25rem',
             optionBorderRadius: '0.75rem',
-            optionGap: '1rem'
+            optionGap: '1rem',
+            customClasses: {
+                buttonContainer: 'justify-between'
+            }
         },
         i18n: {
             pressEnter: 'Pressione Enter',

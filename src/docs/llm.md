@@ -26,7 +26,7 @@ The root object of your form definition.
 | `id` | `string` | Yes | Unique identifier for the form. |
 | `title` | `string` | Yes | The title of the form. |
 | `questions` | `Question[]` | Yes | An array of question objects (see below). |
-| `theme` | `FormTheme` | No | Customization options for the form's appearance. Supports `customClasses` object block for deep style tailwind injections. |
+| `theme` | `FormTheme` | No | Customization options for the form's appearance. Supports `customClasses` object block for deep style tailwind injections (e.g., `buttonContainer`, `buttonPrimary`). |
 | `i18n` | `object` | No | Override labels (next, back, submit, pressEnter). |
 | `disableAutoFocus` | `boolean` | No | Prevent auto-scroll/focus on load. |
 | `layoutSettings.internalScroll` | `boolean` | No | Overrides the internal form scrolling behavior. If `true` (default), the form scrolls inside its own container. If `false`, it lets the parent window scroll naturally. |

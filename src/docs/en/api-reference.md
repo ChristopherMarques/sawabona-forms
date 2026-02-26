@@ -54,7 +54,7 @@ Customize the look and feel of your form.
 | `optionBorderWidth` | `string` | Border width for multiple-choice bounds. |
 | `optionActiveColor` | `string` | Active state border and background tint color. |
 | `optionGap` | `string` | Gap spacing between option items. |
-| `customClasses` | `object` | A master configuration for CSS classes injection (like Tailwind classes). Accepts keys: `container`, `title`, `description`, `input`, `option`, `optionActive`, `buttonPrimary`, `buttonSecondary`. |
+| `customClasses` | `object` | A master configuration for CSS classes injection (like Tailwind classes). Accepts keys: `container`, `title`, `description`, `input`, `option`, `optionActive`, `buttonContainer`, `buttonPrimary`, `buttonSecondary`. |
 
 ## Question
 

@@ -54,7 +54,7 @@ Personalize o visual e estilo do seu formulário.
 | `optionBorderWidth` | `string` | Espessura da borda. |
 | `optionActiveColor` | `string` | Cor de destaque no fundo e borda quando a opção estiver ativa. |
 | `optionGap` | `string` | Espaçamento (`gap`) entre as opções da lista. |
-| `customClasses` | `object` | Configuração mestre para injeção de classes CSS (como Tailwind). Aceita as chaves: `container`, `title`, `description`, `input`, `option`, `optionActive`, `buttonPrimary`, `buttonSecondary`. |
+| `customClasses` | `object` | Configuração mestre para injeção de classes CSS (como Tailwind). Aceita as chaves: `container`, `title`, `description`, `input`, `option`, `optionActive`, `buttonContainer`, `buttonPrimary`, `buttonSecondary`. |
 
 ## Question (Pergunta)
 
